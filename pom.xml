@@ -3,9 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com</groupId>
 	<artifactId>yyfsshj</artifactId>
+	<name>yyfsshj</name>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>yyfsshj Maven Webapp</name>
+	<version>1.0</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -21,8 +24,7 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-api</artifactId> 
-			<version>7.0</version> <scope>provided</scope> </dependency> -->
+		
 		<!-- spring依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -129,7 +131,7 @@
 					<warName>yyfsshj</warName>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
