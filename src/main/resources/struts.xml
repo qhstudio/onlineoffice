@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="user-input-ui" class="com.yyf.actions.UserAction">
+            <result name="success">/WEB-INF/jsp/user/user-input.jsp</result>
+        </action>
+        
+        <action name="user-input" class="com.yyf.actions.UserAction" method="input">
+            <result name="input" type="redirectAction">user-input-ui</result>
+        </action>
+    </package>
+
+</struts>
