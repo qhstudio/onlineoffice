@@ -9,12 +9,12 @@
             <!--jdbc数据库的连接地址 （本地）
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/yyf"/>
 			<property name="hibernate.connection.username" value="root"/>
-			<property name="hibernate.connection.password" value="yyf12345"/>-->
-			
+			<property name="hibernate.connection.password" value="yyf12345"/>
+			-->
 			<!-- coding 演示地址 -->
-				<property name="hibernate.connection.url" value="jdbc:mysql://10.9.1.188:3306/cf_b2f7468f_6712_4fbd_a2da_2c82dade63c1?user=l2r0E4ni2lM5zvju&password=uSHhGrMlNob6uSwu"/>
-				<property name="hibernate.connection.username" value="l2r0E4ni2lM5zvju"/>
-				<property name="hibernate.connection.password" value="uSHhGrMlNob6uSwu"/>
+				<property name="hibernate.connection.url" value="mysql://xP2sehNmC4c2V98R:gvnleiZARFlQ96BY@10.9.1.188:3306/cf_b2f7468f_6712_4fbd_a2da_2c82dade63c1?reconnect=true"/>
+				<property name="hibernate.connection.username" value="xP2sehNmC4c2V98R"/>
+				<property name="hibernate.connection.password" value="gvnleiZARFlQ96BY"/>
 			
             <!--配置方言-->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
