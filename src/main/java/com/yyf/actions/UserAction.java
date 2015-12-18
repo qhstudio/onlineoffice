@@ -29,6 +29,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	
 	public String input() throws Exception {
 		System.out.println(model);
+		if(model.getRole().getRoleId() == null){
+			model.setRole(null);
+		}
+		model.setRole(null);
 		userService.addUser(model);
 		return INPUT;
 	}
