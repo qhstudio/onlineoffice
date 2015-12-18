@@ -21,6 +21,14 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>  
 		</dependency>
+		<!-- 
+		<dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+         -->
 		<!-- spring依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
