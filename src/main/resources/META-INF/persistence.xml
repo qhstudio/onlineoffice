@@ -13,7 +13,7 @@
 			<property name="hibernate.connection.password" value="yyf12345"/>
 			-->
 			<!-- coding 演示地址 -->
-				<property name="hibernate.connection.url" value="jdbc:mysql://xP2sehNmC4c2V98R:gvnleiZARFlQ96BY@10.9.1.188:3306/cf_b2f7468f_6712_4fbd_a2da_2c82dade63c1?reconnect=true"/>
+				<property name="hibernate.connection.url" value="jdbc:mysql://10.9.1.188:3306/cf_b2f7468f_6712_4fbd_a2da_2c82dade63c1"/>
 				<property name="hibernate.connection.username" value="xP2sehNmC4c2V98R"/>
 				<property name="hibernate.connection.password" value="gvnleiZARFlQ96BY"/>
 			
