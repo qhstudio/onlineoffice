@@ -104,7 +104,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>mavenjpa</finalName>
+		<finalName>yyfsshj</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

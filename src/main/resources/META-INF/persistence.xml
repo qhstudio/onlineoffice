@@ -9,8 +9,8 @@
             <!--jdbc数据库的连接地址 （本地）
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/yyf"/>
 			<property name="hibernate.connection.username" value="root"/>
-			<property name="hibernate.connection.password" value="yyf12345"/>
-			-->
+			<property name="hibernate.connection.password" value="yyf12345"/>-->
+			
 			<!-- coding 演示地址 -->
 				<property name="hibernate.connection.url" value="jdbc:mysql://10.9.1.188:3306/cf_b2f7468f_6712_4fbd_a2da_2c82dade63c1?user=l2r0E4ni2lM5zvju&password=uSHhGrMlNob6uSwu"/>
 				<property name="hibernate.connection.username" value="l2r0E4ni2lM5zvju"/>
