@@ -7,14 +7,9 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
-    <package name="default" namespace="/" extends="struts-default">
-        <action name="user-input-ui" class="com.yyf.actions.UserAction">
-            <result name="success">/WEB-INF/jsp/user/user-input.jsp</result>
-        </action>
-        
-        <action name="user-input" class="com.yyf.actions.UserAction" method="input">
-            <result name="input" type="redirectAction">user-input-ui</result>
-        </action>
-    </package>
+    
+    <package name="default" namespace="/" extends="struts-default,json-default"></package>
+    
+    <include file="example.xml"/>
 
 </struts>

@@ -6,10 +6,14 @@
 	<name>yyfsshj</name>
 	<packaging>war</packaging>
 	<version>1.0</version>
+	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<struts-version>2.3.16.3</struts-version>
+		<spring-version>4.2.3.RELEASE</spring-version>
+		<hibernate-version>4.1.0.Final</hibernate-version>
+		<java-version>1.7</java-version>
 	</properties>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -29,17 +33,17 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.2.3.RELEASE</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.2.3.RELEASE</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.2.3.RELEASE</version>
+			<version>${spring-version}</version>
 		</dependency>
 
 
@@ -52,29 +56,42 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.1.0.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.0.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 
 		<!-- Struts2 依赖 -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.16.3</version>
+			<version>${struts-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.3.16.3</version>
+			<version>${struts-version}</version>
 		</dependency>
 
+		<!-- struts2零配置依赖 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-convention-plugin</artifactId>
+			<version>${struts-version}</version>
+		</dependency>
+
+		<!-- struts2的json依赖 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>${struts-version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -97,6 +114,13 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -117,8 +141,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -131,20 +155,12 @@
 					<warName>yyfsshj</warName>
 				</configuration>
 			</plugin>
-			
-			<!-- -->
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<path>/</path>
-					<port>8080</port>
-				</configuration>
-			</plugin>
- 			
 
-			<!--
+			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> <configuration> <path>/</path> <port>8080</port> </configuration> 
+				</plugin> -->
+
+			<!-- -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -161,7 +177,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			 -->
+
 		</plugins>
 	</build>
 </project>
