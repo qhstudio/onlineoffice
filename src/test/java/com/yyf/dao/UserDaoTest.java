@@ -40,7 +40,7 @@ public class UserDaoTest {
 		Pageable pageable = new PageRequest(0, 5, new Sort(
                 Direction.DESC, "userId"));
 		Page<User> page = userDao.findAll(pageable);
-		System.out.println(page.getNumber());
+		System.out.println(page.getContent());
 //		System.out.println(page.getContent());
 	}
 

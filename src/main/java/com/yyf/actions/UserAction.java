@@ -1,7 +1,5 @@
 package com.yyf.actions;
 
-import java.util.List;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -14,6 +12,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yyf.model.User;
+import com.yyf.service.RoleService;
 import com.yyf.service.UserService;
 
 /**
@@ -47,6 +46,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	private User model = new User();
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 
 	@Override
 	public User getModel() {
@@ -68,7 +69,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
         Page<User> page = userService.findAll(pageNum, DEFAULT_PAGE_SIZE);
         
 		ActionContext.getContext().put("page", page);
-		
 		return SUCCESS;
 	}
 	
@@ -76,10 +76,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 * 用户增加页面
 	 */
 	@Action(value = "user-input", results = {
-			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/user/user-input.jsp") })
-	public String doSave() throws Exception {
-		return SUCCESS;
+			@Result(name = "input", type = "dispatcher", location = "/WEB-INF/content/user/user-input.jsp") 
+			
 	}
+			)
+	public String doInput() throws Exception {
+		ActionContext.getContext().put("roleList", roleService.getRoleList());
+		return INPUT;
+	}
+	
 
 	/**
 	 * 用户数据提交
@@ -88,11 +93,30 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 * @throws Exception
 	 */
 	@Action(value = "user-input-submit", results = {
-			@Result(name = "success", type = "redirectAction", location = "user-input", params = {}) })
-	public String doInput() throws Exception {
-		System.out.println(model);
+			@Result(name = "success", type = "redirectAction", location = "user-input", params = {}),
+			@Result(name = "input", type = "chain",params={"actionName","user-input","namespace","/user","method","doInput"})
+			})
+			//params={"actionName","user-input","namespace","/user","method","doInput"})
+	public String doSubmit() throws Exception {
 		userService.addUser(model);
+		
 		return SUCCESS;
 	}
-
+	
+	public void validateDoSubmit() {
+		if(null == model.getUserName() || "".equals(model.getUserName().trim())){
+			addFieldError("userName", getText("userNameNull"));
+		}
+		
+		if(null == model.getUserBirth()){
+			addFieldError("userBirth", getText("userBirthNull"));
+		}
+		
+		if(null == model.getRole().getRoleId() || "".equals(model.getRole().getRoleId())){
+			addFieldError("role.roleId", getText("roleNull"));
+		}
+		
+		System.out.println(getFieldErrors());
+	}
+	
 }

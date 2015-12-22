@@ -4,12 +4,17 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
-    
-    <package name="default" namespace="/" extends="struts-default,json-default"></package>
-    
-    <include file="example.xml"/>
+	
+	<constant name="struts.custom.i18n.resources" value="message" />
+	<constant name="struts.multipart.maxSize" value="9999999999" />
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	
+	<!--禁用动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<!-- 默认的视图主题 -->
+	<constant name="struts.ui.theme" value="xhtml" />
+	<package name="default" namespace="/" extends="struts-default,json-default"></package>
+	<include file="example.xml" />
 
 </struts>
