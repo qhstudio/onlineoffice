@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com</groupId>
-	<artifactId>yyfsshj</artifactId>
-	<name>yyfsshj</name>
+	<artifactId>dms</artifactId>
+	<name>dms</name>
 	<packaging>war</packaging>
 	<version>1.0</version>
 	<url>http://maven.apache.org</url>
@@ -121,7 +121,13 @@
 			<version>1.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>2.2.1</version>
+		</dependency>
 
+<!-- 
 		<dependency>
 			<groupId>ueditor</groupId>
 			<artifactId>ueditor</artifactId>
@@ -129,11 +135,11 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.1.jar</systemPath>
 		</dependency>
- 
+ -->
 
 	</dependencies>
 	<build>
-		<finalName>yyfsshj</finalName>
+		<finalName>dms</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -161,7 +167,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<warName>yyfsshj</warName>
+					<warName>dms</warName>
 				</configuration>
 			</plugin>
 
