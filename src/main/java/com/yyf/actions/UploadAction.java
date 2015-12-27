@@ -85,10 +85,10 @@ public class UploadAction extends ActionSupport {
 	@Action(value = "file-upload", results = {
 			@Result(name = "success", type = "redirect") })
 	public String execute() throws Exception {
-//		User user = (User) ActionContext.getContext().getSession().get("user");
-//		Long userId = user.getUserId();
-		User user =new User();
-		user.setUserId(1l);
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		if(user == null){
+			return "nouser";
+		}
 		String uri = user.getUserId()+"/document/";
 		File f=new File("G:/upload/"+uri);
 		f.mkdirs();
@@ -97,7 +97,7 @@ public class UploadAction extends ActionSupport {
 		uri += UUID.randomUUID().toString() + "." + ext;
 		FileUtil.saveFile(new FileInputStream(file), new File("G:/upload/"+uri));
 		
-		System.out.println(docId+" "+fileName);
+//		System.out.println(docId+" "+fileName);
 		Doc doc = docSevice.getDocById(docId);
 		doc.setDocDate(new Date());
 		doc.setDocName(fileName);
@@ -105,12 +105,14 @@ public class UploadAction extends ActionSupport {
 		float fileSize = file.length()/1024;
 		doc.setDocSize(fileSize);
 		doc.setDocPath(uri);
-		doc.setAuthority(3);
+		doc.setDocAuthority(3);
+		doc.setDocContentType(contentType);
 		docSevice.addDoc(doc);
 		
 		OfficeConvert convert = getOfficeConvert();
 		boolean isOffice = convert.isOfficeFile(fileName);
 		if(isOffice){
+			new Thread().start();
 			convert.convertToPDF( new File("G:/upload/"+uri),  new File("G:/upload/"+uri+".pdf"));
 			convert.convertToSWF(new File("G:/upload/"+uri+".pdf"), new File("G:/upload/"+uri+".swf"));
 			System.out.println("转换成功");

@@ -1,32 +1,61 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 
-	<p>
-		<a href="javascript:gotoPage(0)">首页</a>
-
-		<s:if test="#page.number != 0">
-			<a href="javascript:gotoPage(${page.number - 1})">上一页</a>
-		</s:if>
-
-		<s:if test="#page.number != #page.totalPages - 1">
-			<a href="javascript:gotoPage(${page.number + 1})">下一页</a>
-		</s:if>
 
 
-		<a href="javascript:gotoPage(${page.totalPages - 1})">末页</a> (当前第
-			<input type="number" size="1" style="text-align: center;"  value="${page.number+1}" onchange="gotoPage(this.value-1)"> 页 共 ${page.totalPages} 页)
-			
-	</p>
+	<nav>
+		<ul class="pagination">
+			<c:if test="${page.number != 0}">
+				<li><a href="javascript:gotoPage(0)">首页</a></li>
+				<li><a href="javascript:gotoPage(${page.number - 1})"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;
+							上一页</span>
+				</a></li>
+
+			</c:if>
+			<c:if test="${page.number == 0}">
+				<li class="disabled"><a href="javascript:gotoPage(0)">首页</a></li>
+				<li class="disabled"><a
+					href="javascript:gotoPage(${page.number - 1})"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;
+							上一页</span>
+				</a></li>
+
+			</c:if>
+
+
+			<li class="disabled"><a>(第 ${page.number+1} 页 共
+					${page.totalPages} 页)</a></li>
+
+			<c:if test="${page.number != page.totalPages - 1}">
+				<li><a href="javascript:gotoPage(${page.number + 1})"
+					aria-label="Next"> <span aria-hidden="true">下一页 &raquo;</span>
+				</a></li>
+				<li><a href="javascript:gotoPage(${page.totalPages - 1})">末页</a></li>
+			</c:if>
+			<c:if test="${page.number == page.totalPages - 1}">
+				<li class="disabled"><a
+					href="javascript:gotoPage(${page.number + 1})" aria-label="Next">
+						<span aria-hidden="true">下一页 &raquo;</span>
+				</a></li>
+				<li class="disabled"><a
+					href="javascript:gotoPage(${page.totalPages - 1})">末页</a></li>
+			</c:if>
+
+			<!-- <li><input type="text" value="${page.number+1}" onchange="gotoPage(this.value-1)"></li> -->
+		</ul>
+	</nav>
 
 </div>
 <script type="text/javascript">
 	var actionValue = document.getElementById("actionValue").value;
 	var total = parseInt("${page.totalPages}");
 	function gotoPage(pageNum) {
-		if(pageNum < 0){
+		if (pageNum < 0) {
 			pageNum = 0;
-		}else if(pageNum > total - 1){
+		} else if (pageNum > total - 1) {
 			pageNum = total - 1;
 		}
 		window.location.href = actionValue + ".action?pageNum=" + pageNum;

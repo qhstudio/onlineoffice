@@ -42,7 +42,7 @@
 								$("#get-more-btn").remove();
 							}
 							for (var i = 0; i < data.docs.length; i++) {
-								var str = "<li class=" + "'list-group-item'" + "><a href=" + "'docResult.html'" 
+								var str = "<li class=" + "'list-group-item'" + "><a href=" + "'main/doc-result.action?docId="+data.docs[i].docId+"'" 
 										+"><img src=" + "'img/icon-"+ data.docs[i].docFoot+".png'" +"> "
 										+ data.docs[i].docName
 										+ "</a><p>上传者:"

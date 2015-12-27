@@ -30,7 +30,14 @@
 						</div>
 						<div id="uploader" class="wu-example form-horizontal">
 							<!--<label for="inputDocName" class="col-sm-2 control-label"></label>-->
-							<div id="thelist" class="uploader-list"></div>
+							<div id="thelist" class="uploader-list">
+								<c:if test="${upDoc != null }">
+									<div id="" class="item">
+										<h4 class="info">${upDoc.docName}.${upDoc.docFoot}</h4>
+										<p class="state">当前文档</p>
+									</div>
+								</c:if>
+							</div>
 							<div class="btns">
 								<div id="picker">选择文件</div>
 								<button id="ctlBtn" class="btn btn-default">开始上传</button>
@@ -43,14 +50,15 @@
 							</button>
 							<i class="glyphicon glyphicon-info-sign"></i> 填写文档基本信息
 						</div>
-						<form class="form-horizontal" id="doc-upload-form" action="doc/add-doc-info.action" method="post">
-							<input type="hidden" value="${doc.docId }" name="docId"
+						<form class="form-horizontal" id="doc-upload-form"
+							action="doc/add-doc-info.action" method="post">
+							<input type="hidden" value="${upDoc.docId }" name="docId"
 								id="docId"><br>
 							<div class="form-group">
 								<label for="inputDocName" class="col-sm-2 control-label">名称</label>
 								<div class="col-sm-8">
 									<input type="text" class="form-control" id="inputDocName"
-										name="docName" placeholder="请输入文档名称">
+										name="docName" placeholder="请输入文档名称" value="${upDoc.docName }">
 								</div>
 								<div class="col-sm-2 input-warning">请填写文档名称</div>
 							</div>
@@ -58,7 +66,7 @@
 								<label for="inputDocName" class="col-sm-2 control-label">类型</label>
 								<div class="col-sm-4">
 									<select class="form-control">
-										<option value="none">请选择</option>
+										<option value="23">请选择</option>
 										<option>技术类</option>
 										<option>2</option>
 										<option>3</option>
@@ -67,21 +75,36 @@
 									</select>
 								</div>
 								<div class="col-sm-4">
-									<select class="form-control" name="typeId">
-										<option value="18">请选择</option>
+									<select class="form-control" name="typeId" id="childType">
+										<option value="24">请选择</option>
 										<option value="18">Java</option>
 									</select>
+									<script type="text/javascript">
+										if ($("#docId").val() != null
+												&& $("#docId").val().trim() != '') {
+											$("#childType").val(
+													'${upDoc.docType.typeId}');
+										}
+									</script>
 								</div>
 								<div class="col-sm-2">请选择类型</div>
 							</div>
 							<div class="form-group">
 								<label for="inputDocName" class="col-sm-2 control-label">权限</label>
 								<div class="col-sm-8">
-									<select class="form-control" name="docAuthority">
+									<select class="form-control" name="docAuthority"
+										id="docAuthority">
 										<option value="1">公开</option>
 										<option value="2">会员</option>
 										<option value="3">仅自己</option>
 									</select>
+									<script type="text/javascript">
+										if ($("#docId").val() != null
+												&& $("#docId").val().trim() != '') {
+											$("#docAuthority").val(
+													'${upDoc.docAuthority}');
+										}
+									</script>
 								</div>
 								<div class="col-sm-2">请选择文档查看权限</div>
 							</div>
@@ -89,8 +112,8 @@
 							<div class="form-group">
 								<label for="inputDocName" class="col-sm-2 control-label">文档说明</label>
 								<div class="col-sm-8">
-									<textarea class="form-control" id="doc-desc" rows="3" name="docDesc"
-										placeholder="请对文档进行简要的说明"></textarea>
+									<textarea class="form-control" id="doc-desc" rows="3"
+										name="docDesc" placeholder="请对文档进行简要的说明"> ${upDoc.docDesc }</textarea>
 								</div>
 								<div class="col-sm-2">请输入文档说明</div>
 							</div>
@@ -111,6 +134,9 @@
 	<%@ include file="/WEB-INF/content/public/footer.jspf"%>
 </body>
 <script>
+	$("#left-list-nav").find("a").eq(2).addClass("active");
+
+	var isUpload = false;
 	var $ = jQuery, $list = $('#thelist'), $btn = $('#ctlBtn'), state = 'pending', uploader;
 	var nowFile = null;
 	uploader = WebUploader.create({
@@ -176,6 +202,7 @@
 	});
 	uploader.on('uploadComplete', function(file) {
 		$('#' + file.id).find('.progress').fadeOut();
+		isUpload = true;
 	});
 	uploader.on('all', function(type) {
 		if (type === 'startUpload') {
@@ -229,11 +256,15 @@
 			$("#doc-desc").parent().parent().removeClass("has-error")
 		}
 		if ($(this).find(".has-error").length == 0) {
+			if ($("#docId").val() == null || $("#docId").val().trim() == '') {
+				alert("请先上传文件!");
+				return false;
+			}
 			return true;
-		} 
-			
+		}
+
 		return false;
-		
+
 	});
 </script>
 </html>

@@ -13,4 +13,6 @@ public interface DocSevice {
 	Doc addDoc(Doc doc);
 
 	Doc getDocById(Long docId);
+
+	Page<Doc> getMyDocs(Long userId, Integer pageNum, int defaultPageSize);
 }

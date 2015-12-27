@@ -116,20 +116,10 @@
 			<div class="col-md-4">
 				<div class="panel">
 					<div class="panel-heading">
-						<a href="#">最新上传</a><a href="#" class="rigtht-more">查看更多</a>
+						<a href="#">最新上传</a><a href="main/recent" class="rigtht-more">查看更多</a>
 					</div>
 					<div class="panel-body">
-						<ul>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
+						<ul id="recent-index">
 						</ul>
 					</div>
 				</div>
@@ -137,20 +127,10 @@
 			<div class="col-md-4">
 				<div class="panel">
 					<div class="panel-heading">
-						<a href="#">热门文档</a><a href="#" class="rigtht-more">查看更多</a>
+						<a href="#">热门文档</a><a href="main/recent" class="rigtht-more">查看更多</a>
 					</div>
 					<div class="panel-body">
-						<ul>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
-							<li><a href="#"><img src="img/wordicon.jpg">
-									高二物理选修3-1模块综合测试高二物理选修3-1模块综合测试</a></li>
+						<ul id="hot-index">
 						</ul>
 					</div>
 				</div>
@@ -163,11 +143,13 @@
 					<div class="panel-body">
 						<div class="row" id="personal-center">
 							<div class="col-md-5">
+								<p align="center">${user.userName }</p>
 								<img src="img/pass.png" alt="..." class="img-thumbnail">
+
 							</div>
 							<div class="col-md-5">
 								<a class="btn btn-block btn-warning" href="doc/upload">上传文档</a>
-								<a class="btn btn-block btn-warning">我的文库</a> <a
+								<a class="btn btn-block btn-warning" href="doc/mydoc-list">我的文库</a> <a
 									class="btn btn-block btn-warning">消息 <span class="badge">3</span></a>
 							</div>
 						</div>
@@ -177,7 +159,23 @@
 		</div>
 	</div>
 
-	
-<%@ include file="/WEB-INF/content/public/footer.jspf"%>
+
+	<%@ include file="/WEB-INF/content/public/footer.jspf"%>
 </body>
+<script type="text/javascript">
+function getMoreResult() {
+		$.post("main/recentListInfo",{
+							pageNum : 0,
+						},
+						function(data) {
+							var len = data.docs.length;
+							for (var i = 0; i < (len > 5?5:len); i++) {
+								var str = "<li><a href="+"'main/doc-result.action?docId="+data.docs[i].docId+"'"+"><img src=" + "'img/icon-"+ data.docs[i].docFoot+".png'" +"> "+ data.docs[i].docName+"</a></li>"
+								$("#recent-index").append(str);
+								$("#hot-index").append(str);
+							}
+						});
+	}
+getMoreResult()
+</script>
 </html>

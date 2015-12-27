@@ -5,7 +5,9 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.data.domain.Page;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.yyf.base.BaseAction;
 import com.yyf.model.Doc;
 import com.yyf.model.DocType;
@@ -28,9 +30,18 @@ public class DocAction extends BaseAction{
 	private Long typeId;
 	private Integer docAuthority;
 	private String docDesc;
+	private Page<Doc> page;
 	
 	
 	
+	public Page<Doc> getPage() {
+		return page;
+	}
+
+	public void setPage(Page<Doc> page) {
+		this.page = page;
+	}
+
 	public Long getDocId() {
 		return docId;
 	}
@@ -86,6 +97,16 @@ public class DocAction extends BaseAction{
 	public String execute() throws Exception {
 		return SUCCESS;
 	}
+	
+	
+	@Action(value = "mydoc-list", results = {
+			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/doc/mydoc-list.jsp") })
+	public String doMyDocList() throws Exception {
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		page = docSevice.getMyDocs(user.getUserId(),getPageNum(),DEFAULT_PAGE_SIZE);
+		return SUCCESS;
+	}
+	
 
 	/**
 	 * 跳转到上传页面
@@ -96,13 +117,17 @@ public class DocAction extends BaseAction{
 	@Action(value = "upload", results = {
 			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/doc/upload.jsp") })
 	public String doUpload() throws Exception {
-		
+		if(docId != null){			
+			upDoc = docSevice.getDocById(docId);
+		}
 		return SUCCESS;
 	}
 	@Action(value = "add-get-doc", results = {@Result(name = "success", type = "json", params = { "root", "upDoc" })})
 	public String addDocFile() throws Exception {
-		User user =new User();
-		user.setUserId(1l);
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		if(user == null){
+			return "nouser";
+		}
 		Doc doc = new Doc();
 		doc.setDocOwnUser(user);
 		upDoc = docSevice.addDoc(doc);
@@ -115,7 +140,7 @@ public class DocAction extends BaseAction{
 		Doc innerDoc = docSevice.getDocById(docId);
 		DocType docType = new DocType();
 		docType.setTypeId(typeId);
-		innerDoc.setAuthority(docAuthority);
+		innerDoc.setDocAuthority(docAuthority);
 		innerDoc.setDocDesc(docDesc);
 		innerDoc.setDocName(docName);
 		innerDoc.setDocType(docType);

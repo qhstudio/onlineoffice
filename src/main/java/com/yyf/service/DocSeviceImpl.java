@@ -36,4 +36,10 @@ public class DocSeviceImpl implements DocSevice {
 		return dao.findOne(docId);
 	}
 
+	@Override
+	public Page<Doc> getMyDocs(Long userId, Integer pageNum, int defaultPageSize) {
+		Pageable pageable = new PageRequest(pageNum, defaultPageSize, new Sort(Direction.DESC, "docDate"));
+		return dao.findByOwnUserId(userId, pageable);
+	}
+
 }

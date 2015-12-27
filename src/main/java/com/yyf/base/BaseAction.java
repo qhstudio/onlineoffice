@@ -23,7 +23,9 @@ public class BaseAction extends ActionSupport {
 	protected Integer pageNum;
 
 	public Integer getPageNum() {
-		
+		if(pageNum == null){
+			pageNum = DEFAULT_PAGE_NUM;
+		}
 		return pageNum;
 	}
 

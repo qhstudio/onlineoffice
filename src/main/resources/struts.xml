@@ -15,24 +15,44 @@
 	<!-- 默认的视图主题 -->
 	<constant name="struts.ui.theme" value="simple" />
 	<package name="default" namespace="/" extends="json-default">
+		<!-- 声明拦截器 -->
+		<interceptors>
+			<interceptor name="LoginInterceptor" class="com.yyf.Interceptor.LoginInterceptor"></interceptor>
+			<!-- 定义的拦截器栈 -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 重新定义默认的拦截器栈 -->
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
 		<default-action-ref name="index" />
-
-<!-- 
 		<global-results>
-			<result name="error">/WEB-INF/jsp/error.jsp</result>
+			<result name="down" type="stream">
+				<param name="allowCaching">true</param>
+				<param name="bufferSize">1024</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentLength">${size}</param>
+				<param name="contentType">${contentType}</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			</result>
+			<result name="nouser">/WEB-INF/content/nouser-error.jsp</result>
 		</global-results>
-
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception"
 				result="error" />
 		</global-exception-mappings>
-		 -->
+
+
+
 		<action name="index">
 			<result type="redirectAction">
 				<param name="actionName">index</param>
 				<param name="namespace">/main</param>
 			</result>
 		</action>
+
 	</package>
 	<include file="example.xml" />
 

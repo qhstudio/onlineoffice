@@ -38,6 +38,25 @@ public class MainAction extends BaseAction {
 	
 	@Resource
 	private UserService userService;
+	private Long docId;
+	private Doc doc;
+	
+
+	public Doc getDoc() {
+		return doc;
+	}
+
+	public void setDoc(Doc doc) {
+		this.doc = doc;
+	}
+
+	public Long getDocId() {
+		return docId;
+	}
+
+	public void setDocId(Long docId) {
+		this.docId = docId;
+	}
 
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 
@@ -64,8 +83,7 @@ public class MainAction extends BaseAction {
 	@Action(value = "index", results = {
 			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/main/index.jsp") })
 	public String doIndex() throws Exception {
-		User user = userService.getUser(1l);
-		ActionContext.getContext().getSession().put("user", user);
+		
 		return SUCCESS;
 	}
 
@@ -102,7 +120,7 @@ public class MainAction extends BaseAction {
 	@Action(value = "doc-result", results = {
 			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/doc/doc-result.jsp") })
 	public String doToResultDoc() throws Exception {
-
+		doc = docSevice.getDocById(docId);
 		return SUCCESS;
 	}
 

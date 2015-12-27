@@ -49,8 +49,22 @@ public class DocDaoTest {
 		}
 			
 	}
-
-
+	@Test
+	public void findOneByCondation() {
+		Doc d = dao.findByOwnUserId(2l);
+		System.out.println(d.getDocName());
+	}
+	
+	@Test
+	public void testFindAllByCondation() {
+		
+		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "docDate"));
+		Page<Doc> page = dao.findByOwnUserId(1l, pageable);
+		for(Doc d:page.getContent()){
+			System.out.println(d.getDocName()+" "+d.getDocOwnUser().getUserName());
+		}
+	}
+	
 	@Test
 	public void testFindAll() {
 		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "docDate"));
@@ -96,5 +110,18 @@ public class DocDaoTest {
 		docForkers.add(userDao.findOne(5l));
 		doc.setDocForkers(docForkers);
 		dao.save(doc);
+	}
+	
+	public static void main(String[] args) {
+//		ApplicationContext ac = null;
+//		DocDao dao = null;
+//		ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		dao = (DocDao) ac.getBean("docDao");
+//		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "docDate"));
+//		Page<Doc> page = dao.findByOwnUserId(2l, pageable);
+//		
+//		for(Doc d:page.getContent()){
+//			System.out.println(d.getDocName()+" - "+d.getDocOwnUser().getUserName());
+//		}
 	}
 }

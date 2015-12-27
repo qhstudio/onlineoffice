@@ -38,15 +38,28 @@ public class Doc {
 	private String docPath;
 	private String docFoot;
 	private Integer docAuthority;
+	private String docContentType;
 	
 
-	public Integer getAuthority() {
+	public String getDocContentType() {
+		return docContentType;
+	}
+
+	public void setDocContentType(String docContentType) {
+		this.docContentType = docContentType;
+	}
+
+	
+
+	public Integer getDocAuthority() {
 		return docAuthority;
 	}
 
-	public void setAuthority(Integer authority) {
-		this.docAuthority = authority;
+	public void setDocAuthority(Integer docAuthority) {
+		this.docAuthority = docAuthority;
 	}
+
+
 
 	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "docTypeId")
