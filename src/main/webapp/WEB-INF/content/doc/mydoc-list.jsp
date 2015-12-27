@@ -43,7 +43,7 @@
 										$("#docAuthority${docId}").val(
 												'${docAuthority}');
 									</script></td>
-									<td><a href="#" class="btn btn-danger btn-sm">删除</a> <a
+									<td><a href="doc/delete?docId=${docId }" class="btn btn-danger btn-sm">删除</a> <a
 										href="doc/upload?docId=${docId }" class="btn btn-warning btn-sm">修改</a> <a
 										href="main/doc-result.action?docId=${docId }"
 										class="btn btn-info btn-sm">查看</a></td>

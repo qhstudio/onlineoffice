@@ -25,7 +25,7 @@ public class DocTypeDaoTest {
 
 	@Test
 	public void testFindAll() {
-		System.out.println(dao.findAll());
+		System.out.println(dao.findByParentTypeIsNull());
 	}
 
 	@Test

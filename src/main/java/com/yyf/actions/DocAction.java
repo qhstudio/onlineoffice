@@ -1,6 +1,10 @@
 package com.yyf.actions;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -31,9 +35,17 @@ public class DocAction extends BaseAction{
 	private Integer docAuthority;
 	private String docDesc;
 	private Page<Doc> page;
+	private List<DocType> typeList;
 	
 	
-	
+	public List<DocType> getTypeList() {
+		return typeList;
+	}
+
+	public void setTypeList(List<DocType> typeList) {
+		this.typeList = typeList;
+	}
+
 	public Page<Doc> getPage() {
 		return page;
 	}
@@ -99,14 +111,30 @@ public class DocAction extends BaseAction{
 	}
 	
 	
+	/**
+	 * 我的文档页面
+	 * @return
+	 * @throws Exception
+	 */
 	@Action(value = "mydoc-list", results = {
 			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/doc/mydoc-list.jsp") })
 	public String doMyDocList() throws Exception {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		page = docSevice.getMyDocs(user.getUserId(),getPageNum(),DEFAULT_PAGE_SIZE);
+		String path = ServletActionContext.getServletContext().getRealPath("/upload/photo/");
+		System.out.println(path);
 		return SUCCESS;
 	}
 	
+	@Action(value = "delete", results = {
+			@Result(name = "success", type = "redirectAction", location = "mydoc-list") })
+	public String delete() throws Exception {
+		if(docId != null){
+			User user = (User) ActionContext.getContext().getSession().get("user");
+			docSevice.delete(user.getUserId(),docId);
+		}
+		return SUCCESS;
+	}
 
 	/**
 	 * 跳转到上传页面
@@ -120,8 +148,10 @@ public class DocAction extends BaseAction{
 		if(docId != null){			
 			upDoc = docSevice.getDocById(docId);
 		}
+		
 		return SUCCESS;
 	}
+	
 	@Action(value = "add-get-doc", results = {@Result(name = "success", type = "json", params = { "root", "upDoc" })})
 	public String addDocFile() throws Exception {
 		User user = (User) ActionContext.getContext().getSession().get("user");

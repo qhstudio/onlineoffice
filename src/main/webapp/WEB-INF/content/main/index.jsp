@@ -52,7 +52,7 @@
 					</div>
 					<div class="left-inner">
 						<div class="left-inner-panel-more">
-							<a href="#">查看更多</a>
+							<a href="admin/sort-manage">查看更多</a>
 						</div>
 					</div>
 				</div>

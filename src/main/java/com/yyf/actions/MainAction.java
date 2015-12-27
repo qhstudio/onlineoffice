@@ -11,10 +11,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.data.domain.Page;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.yyf.base.BaseAction;
 import com.yyf.model.Doc;
-import com.yyf.model.User;
 import com.yyf.service.DocSevice;
 import com.yyf.service.UserService;
 

@@ -15,4 +15,6 @@ public interface DocSevice {
 	Doc getDocById(Long docId);
 
 	Page<Doc> getMyDocs(Long userId, Integer pageNum, int defaultPageSize);
+
+	void delete(Long userId, Long docId) throws Exception;
 }

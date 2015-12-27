@@ -83,7 +83,6 @@ public class DocType {
 		this.docs = docs;
 	}
 
-	@JSON(serialize = false)
 	public Set<DocType> getChildrenDocType() {
 		return childrenDocType;
 	}

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yyf.dao.DocDao;
+import com.yyf.exception.NoUserExcetion;
 import com.yyf.model.Doc;
 
 @Service("DocService")
@@ -40,6 +41,16 @@ public class DocSeviceImpl implements DocSevice {
 	public Page<Doc> getMyDocs(Long userId, Integer pageNum, int defaultPageSize) {
 		Pageable pageable = new PageRequest(pageNum, defaultPageSize, new Sort(Direction.DESC, "docDate"));
 		return dao.findByOwnUserId(userId, pageable);
+	}
+
+	@Override
+	public void delete(Long userId, Long docId) throws Exception {
+		Doc doc= dao.findOne(docId);
+		if(userId == doc.getDocOwnUser().getUserId()){
+			dao.delete(docId);
+		}else{
+			throw new NoUserExcetion();
+		}
 	}
 
 }

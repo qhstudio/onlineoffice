@@ -27,6 +27,7 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 							<i class="glyphicon glyphicon-info-sign"></i> 上传文档
+							(提示：文件必须小于1000KB)
 						</div>
 						<div id="uploader" class="wu-example form-horizontal">
 							<!--<label for="inputDocName" class="col-sm-2 control-label"></label>-->
@@ -65,19 +66,11 @@
 							<div class="form-group">
 								<label for="inputDocName" class="col-sm-2 control-label">类型</label>
 								<div class="col-sm-4">
-									<select class="form-control">
-										<option value="23">请选择</option>
-										<option>技术类</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<select class="form-control" id="parent-type">
 									</select>
 								</div>
 								<div class="col-sm-4">
 									<select class="form-control" name="typeId" id="childType">
-										<option value="24">请选择</option>
-										<option value="18">Java</option>
 									</select>
 									<script type="text/javascript">
 										if ($("#docId").val() != null
@@ -151,6 +144,10 @@
 		pick : '#picker',
 		formData : {
 			fileName : "12.doc"
+		},
+		fileSizeLimit : 1020800,
+		accept : {
+			extensions : 'doc,docx,ppt,pptx,xls,xlsx'
 		}
 	});
 	// 当有文件添加进来的时候
@@ -169,7 +166,12 @@
 	});
 
 	//startUpload
-	uploader.on('uploadStart', function(file) {
+	uploader.on('error', function(type) {
+		if (type == 'fileSizeLimit') {
+			alert('文件大小太大');
+		} else if (type == 'Q_TYPE_DENIED') {
+			alert('文件类型不支持');
+		}
 
 	});
 
@@ -266,5 +268,69 @@
 		return false;
 
 	});
+
+	//获得分类
+	//json/json-doc-types
+	var type_data;
+	$.post("json/json-doc-types", function(data) {
+		type_data = data;
+		for (var i = 0; i < data.doctypes.length; i++) {
+			var str = "<option value="+data.doctypes[i].typeId+">"+data.doctypes[i].typeName+"</option>";
+			$("#parent-type").append(str);
+			if(i == 0){
+				$("#childType").append(str);
+			}
+			
+		}
+		
+		
+		for (var j = 0; j < type_data.doctypes[0].childrenDocType.length; j++) {
+		 	var str = "<option value="+type_data.doctypes[0].childrenDocType[j].typeId+">"+type_data.doctypes[0].childrenDocType[j].typeName+"</option>";
+			$("#childType").append(str);
+		}
+	});
+	
+	
+	
+	$("#parent-type").change(function(){
+		$("#childType").html("");
+		
+		var key = $(this).val();
+		for (var i = 0; i < type_data.doctypes.length; i++) {
+			if(key == type_data.doctypes[i].typeId){
+				var str1 = "<option value="+type_data.doctypes[i].typeId+">"+type_data.doctypes[i].typeName+"</option>";
+				$("#childType").append(str1);
+				for (var j = 0; j < type_data.doctypes[i].childrenDocType.length; j++) {
+					 	var str = "<option value="+type_data.doctypes[i].childrenDocType[j].typeId+">"+type_data.doctypes[i].childrenDocType[j].typeName+"</option>";
+						$("#childType").append(str);
+				}
+				break;
+			}
+		}
+		
+	});
+	
+	/*
+	for (var i = 0; i < data.doctypes.length; i++) {
+		var cstr = "";
+		for (var j = 0; j < data.doctypes[i].childrenDocType.length; j++) {
+			cstr += "<a class='btn btn-info btn-sm' data-toggle='modal' data-target='.bs-example-modal-sm'>"
+					+ "<i class='type-id hidden-content'>"
+					+ data.doctypes[i].childrenDocType[j].typeId
+					+ "</i>"
+					+ data.doctypes[i].childrenDocType[j].typeName
+					+ "</a> ";
+		}
+		var str = "<tr><td>"
+				+ "<a class='btn btn-primary btn-sm'>"
+				+ data.doctypes[i].typeName
+				+ "</a>"
+				+ "</td>"
+				+ "<td>"
+				+ cstr
+				+ "</td>"
+				+ "<td><a class='btn btn-danger btn-sm'  data-toggle='modal' data-target='.bs-example-modal-sm'><i class='glyphicon glyphicon-plus'></i>增加</a></td></tr>";
+		$("#sort-list").append(str);
+	}*/
 </script>
 </html>

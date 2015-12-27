@@ -3,16 +3,13 @@ package com.yyf.actions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yyf.model.Doc;
 import com.yyf.service.DocSevice;
@@ -37,7 +34,7 @@ public class DownLoadAction extends ActionSupport {
 	@Override
 	@Action(value = "down-load-doc")
 	public String execute() throws Exception {
-		Map<String, Object> session = ActionContext.getContext().getSession();
+		//Map<String, Object> session = ActionContext.getContext().getSession();
 		Doc doc = docSevice.getDocById(docId);
 		fileName = doc.getDocName();
 		contentType = doc.getDocContentType();
