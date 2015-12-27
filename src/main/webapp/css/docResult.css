@@ -1,0 +1,28 @@
+.doc-context{
+	height: 500px;
+}
+.commonent-child{
+	padding-left: 50px;
+}
+
+.comment-box button{
+	border: #555 solid 1px;
+	background: none;
+}
+.comment-text{
+	padding: 0;
+	border-bottom: none;
+}
+
+.comment-box{
+	border: none;
+}
+
+.comment-box ul{
+	border: none;
+}
+.comment-submit{
+	float: right;
+	width: 200px;
+	margin: 10px;
+}

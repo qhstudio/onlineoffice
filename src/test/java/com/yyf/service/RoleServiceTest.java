@@ -1,6 +1,5 @@
 package com.yyf.service;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +24,7 @@ public class RoleServiceTest {
 
 	@Test
 	public void testGetRoleList() {
+		@SuppressWarnings("resource")
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		RoleService roleService = (RoleService) ac.getBean("roleService");
 		System.out.println(roleService.getRoleList());

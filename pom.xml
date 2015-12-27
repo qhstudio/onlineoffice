@@ -28,6 +28,12 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- spring依赖 -->
 		<dependency>
@@ -126,16 +132,22 @@
 			<artifactId>jodconverter</artifactId>
 			<version>2.2.1</version>
 		</dependency>
-
-<!-- 
+		
 		<dependency>
-			<groupId>ueditor</groupId>
-			<artifactId>ueditor</artifactId>
-			<version>1.1.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.1.jar</systemPath>
+			<groupId>com.github.livesense</groupId>
+			<artifactId>jodconverter-core</artifactId>
+			<version>1.0.5</version>
 		</dependency>
- -->
+
+
+		<dependency>
+			<groupId>ueditor-mini</groupId>
+			<artifactId>ueditor-mini</artifactId>
+			<version>1.2.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/umeditor1_2_2-utf8-jsp/jsp/ueditor-mini.jar</systemPath>
+		</dependency>
+
 
 	</dependencies>
 	<build>

@@ -108,7 +108,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			addFieldError("userName", getText("userNameNull"));
 		}
 		
-		if(null == model.getUserBirth()){
+		if(null == model.getUserDate()){
 			addFieldError("userBirth", getText("userBirthNull"));
 		}
 		

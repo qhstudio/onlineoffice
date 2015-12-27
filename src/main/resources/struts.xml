@@ -4,17 +4,36 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	
+
 	<constant name="struts.custom.i18n.resources" value="message" />
 	<constant name="struts.multipart.maxSize" value="9999999999" />
 	<constant name="struts.multipart.saveDir" value="/tmp" />
-	
+
 	<!--禁用动态方法调用 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 	<!-- 默认的视图主题 -->
-	<constant name="struts.ui.theme" value="xhtml" />
-	<package name="default" namespace="/" extends="struts-default,json-default"></package>
+	<constant name="struts.ui.theme" value="simple" />
+	<package name="default" namespace="/" extends="json-default">
+		<default-action-ref name="index" />
+
+<!-- 
+		<global-results>
+			<result name="error">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+		 -->
+		<action name="index">
+			<result type="redirectAction">
+				<param name="actionName">index</param>
+				<param name="namespace">/main</param>
+			</result>
+		</action>
+	</package>
 	<include file="example.xml" />
 
 </struts>

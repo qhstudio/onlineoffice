@@ -1,0 +1,37 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
+<div class="bottom-box">
+	<p>@中软国际文库</p>
+</div>
+
+<!--登录模块-->
+<div id="login-box">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			用户登录<i class="glyphicon glyphicon-remove" onclick="closeNode(this)"></i>
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<label for="exampleInputEmail1">用户名</label> <input type="text"
+						class="form-control" id="exampleInputEmail1" placeholder="用户名">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">密码</label> <input
+						type="password" class="form-control" id="exampleInputPassword1"
+						placeholder="密码">
+				</div>
+
+				<button type="submit" class="btn btn-primary btn-block">登录</button>
+				<div class="form-group">
+					<br />
+					<p class="text-right">
+						<a href="#">忘记密码?</a>
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>

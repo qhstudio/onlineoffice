@@ -21,14 +21,15 @@ import org.apache.struts2.json.annotations.JSON;
  *
  */
 @Entity
-@Table(name="role")
+@Table(name = "role_info")
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long RoleId;
 	private String RoleName;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="role")
+	private String RoleDesc;
+
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "role")
 	private Set<User> users = new HashSet<User>();
 
 	public Long getRoleId() {
@@ -47,20 +48,21 @@ public class Role {
 		RoleName = roleName;
 	}
 
-	@Override
-	public String toString() {
-		return "Role [RoleId=" + RoleId + ", RoleName=" + RoleName + "]";
-	}
-
-	@JSON(serialize=false)
+	@JSON(serialize = false)
 	public Set<User> getUsers() {
 		return users;
 	}
-	
+
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-	
-	
+
+	public String getRoleDesc() {
+		return RoleDesc;
+	}
+
+	public void setRoleDesc(String roleDesc) {
+		RoleDesc = roleDesc;
+	}
 
 }

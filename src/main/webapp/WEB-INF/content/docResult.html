@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>文档</title>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mycenter.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/docResult.css" />
+		<script src="../../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--
+        	作者：416530244@qq.com
+        	时间：2015-12-23
+        	描述：ueditor
+        -->
+		<link href="../../umeditor1_2_2-utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../../umeditor1_2_2-utf8-jsp/umeditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../umeditor1_2_2-utf8-jsp/umeditor.min.js"></script>
+		<script type="text/javascript" src="../../umeditor1_2_2-utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- top -->
+				<div class="col-md-12">
+					<div class="body-top">
+						<p><a href="#">登录</a> <a href="#">注册</a></p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!-- search -->
+				<div class="col-md-3"></div>
+				<div class="col-md-9">
+					<div class="search-form-box">
+						<form action="">
+							<div class="logo-box"></div>
+							<div class="input-search-box">
+								<input type="search" class="input-search-input" placeholder="请输入搜索的内容">
+								<button type="submit" class="input-search-btn"><i class="glyphicon glyphicon-search"></i> 搜索</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="search-nav">
+
+					<a href="index.html">
+						首页
+					</a>
+					<a href="docList.html">
+						最新上传
+					</a>
+					<a href="docList.html">
+						热门文档
+					</a>
+					<a href="docList.html">
+						搜索结果
+					</a>
+					<a href="help.html">
+						帮助
+					</a>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="container content-box">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="panel panel-default">
+						<div class="panel-body doc-context">
+							文档
+						</div>
+					</div>
+					<div class="panel panel-default comment-box">
+
+						<ul class="list-group">
+							<li class="list-group-item"><b>评论</b></li>
+
+							
+							<li class="list-group-item comment-text">
+								<!--style给定宽度可以影响编辑器的最终宽度-->
+								<script type="text/plain" id="myEditor" style="width:100%;height:200px;">
+									<p>评论这篇文档..</p>
+								</script>
+
+							</li>
+						</ul>
+						<p>
+							<button class="btn btn-default comment-submit" onclick="getContent()">发表</button>
+						</p>
+
+					</div>
+
+				</div>
+
+				<div class="col-md-3">
+					<div class="panel panel-default">
+
+						<ul class="list-group">
+							<li class="list-group-item">标题：具有响应式特性的嵌入内容</li>
+							<li class="list-group-item">简介：具有响应式特性的嵌入内容具有响应式特性的嵌入内容具有响应式特性的嵌入内容</li>
+							<li class="list-group-item">作者：yyf</li>
+							<li class="list-group-item">上传时间：2015年12月23日20:55:13</li>
+							<li class="list-group-item">大小：206KB</li>
+							<li class="list-group-item">
+								<button href="#" class="btn btn-default btn-sm">下载</button>
+								<button href="#" class="btn btn-default btn-sm">收藏</button>
+								<button href="#" class="btn btn-default btn-sm">评论</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bottom-box">
+			<p>@企业文档管理系统 </p>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		//实例化编辑器
+		var um = UM.getEditor('myEditor');
+
+		function getContent() {
+			var arr = [];
+			arr.push(um.getContent());
+			var insertSr =
+				"<li class='list-group-item'>" +
+				"<div class='panel panel-default'>" +
+				"<ul class='list-group'>" +
+				"<li class='list-group-item'><img src='img/pass.png' class='small-photo'> <b>yyf：</b> 2015-12-23 21:23:19 <a href='#'>删除</a>" + arr + "</li>" +
+				"<li class='list-group-item commonent-child'><button class='reply-btn' onclick='replyComment(this)'>回复</button></li>" +
+				"</ul>" +
+				"</div>" +
+				"</li>";
+			$(insertSr).insertBefore($(".comment-box").eq(0).find("li").last());
+		}
+		
+		var editor_str = "<form class='reply'><textarea class=" + "'form-control'" + "rows=" + "'3'" + "placeholder=" + "评论.." + "></textarea><br></form>";
+
+		function replyComment(mythis) {
+			var $p = $(mythis).parent();
+			if ($p.has("form").length > 0) {
+				//回复信息
+				var replyStr = "<li class='list-group-item commonent-child'><img src='img/pass.png' class='small-photo'> <b>ysh:</b>  2015-12-23 21:23:19 <a href='#'>删除</a><p>" + $p.find("textarea").val() + "<p></li>";
+				//alert($p.find("textarea").val());
+				$(replyStr).insertBefore($p.parent().find("li").last());
+				$p.find("textarea").val("")
+			} else {
+				$(".comment-box").find(".reply").remove();
+				$p.prepend(editor_str);
+			}
+		}
+		var insertSr =
+			"<li class='list-group-item'>" +
+			"<div class='panel panel-default'>" +
+			"<ul class='list-group'>" +
+			"<li class='list-group-item'><img src='img/pass.png' class='small-photo'> <b>yyf：</b> 2015-12-23 21:23:19 <a href='#'>删除</a>" + "<p>这篇文档还不错，赞一个</p>" + "</li>" +
+			"<li class='list-group-item commonent-child'><button class='reply-btn' onclick='replyComment(this)'>回复</button></li>" +
+			"</ul>" +
+			"</div>" +
+			"</li>";
+			
+			for(var i=0;i<5;i++){
+				$(insertSr).insertBefore($(".comment-box").eq(0).find("li").last());
+			}
+		
+	</script>
+
+</html>

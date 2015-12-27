@@ -1,0 +1,278 @@
+body {
+	margin: 0 auto;
+	padding: 0;
+	min-width: 768px;
+	font-family: 微软雅黑, 'Hiragino Sans GB';
+}
+a{
+	color: #000000;
+}
+
+
+.body-top {
+	height: 20px;
+	width: 100%;
+}
+
+.body-top p {
+	text-align: right;
+}
+
+.body-top p a {
+	color: black;
+	text-decoration: underline;
+}
+
+.logo-box {
+	width: 135px;
+	height: 38px;
+	float: left;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	background-position-y: 0px;
+}
+
+.search-form-box {}
+
+.input-search-box {
+	margin-left: 10px;
+	float: left;
+	width: 395px;
+	height: 38px;
+	border: solid 1px #337ab7;
+}
+
+.input-search-input {
+	height: 100%;
+	width: 70%;
+	border: none;
+	outline: none;
+	margin-left: 10px;
+}
+
+.input-search-btn {
+	height: 100%;
+	width: 25%;
+	float: right;
+	border: none;
+	background: #337ab7;
+	color: white;
+}
+
+.search-nav {
+	margin-top: 30px;
+	width: 100%;
+	background: #337ab7;
+	height: 40px;
+}
+
+.search-nav a {
+	display: block;
+	cursor: pointer;
+	line-height: 40px;
+	height: 40px;
+	border-right: 1px solid #CCCCFF;
+	text-align: center;
+	text-decoration: none;
+	width: 138px;
+	font-family: 微软雅黑, 'Hiragino Sans GB';
+	font-size: 16px;
+	font-weight: 400;
+	float: left;
+	background: #337ab7;
+	color: white;
+	-moz-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, 0.1) inset;
+	-webkit-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, 0.1) inset;
+	box-shadow: 0 15px 30px 0 rgba(255, 255, 255, 0.1) inset;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	-o-transition: all .2s;
+	-moz-transition: all .2s;
+	-webkit-transition: all .2s;
+	-ms-transition: all .2s;
+}
+
+.search-nav a:first-child {
+	margin-left: 113px;
+}
+.search-nav a:last-child {
+	border-right:none;
+}
+
+@media (max-width: 1000px) {
+	.search-nav a:first-child {
+		margin-left: 5px;
+	}
+}
+
+.search-nav a {
+	text-decoration: none;
+	color: white;
+}
+
+.search-nav a:hover {
+	-moz-box-shadow: 0 -15px 30px 0 rgba(0, 102, 255, 0.5) inset;
+	-webkit-box-shadow: 0 -15px 30px 0 rgba(0, 102, 255, 0.5) inset;
+	box-shadow: 0 -15px 30px 0 rgba(0, 102, 255, 0.5) inset;
+}
+
+.content-box {
+	/*border: 1px solid red;*/
+	margin-top: 15px;
+	min-width: 850px;
+}
+
+.left-nav {
+	/*border: 1px solid #CCCCFF;*/
+	/*border: 1px solid red;*/
+}
+
+.right-nav{
+	margin-top:20px ;
+}
+
+.left-inner {
+	/*height: 100px;*/
+	width: 100%;
+	margin-bottom: 10px;
+	/*border: 1px solid red;*/
+}
+
+.left-inner-panel-head {}
+
+.left-inner-panel-head a {
+	font-family: 黑体, 'SimHei';
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.left-inner-panel-content {
+	font-family: 微软雅黑, 'Hiragino Sans GB';
+	font-size: 14px;
+	font-weight: 400;
+	margin-left: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 180px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #CCCCFF;
+	/*border: 1px solid red;*/
+}
+
+.left-inner-panel-content a {
+	color: #555;
+	line-height: 25px;
+}
+
+.left-inner-panel-more {
+	margin-left: 25px;
+	margin-top: 5px;
+	width: 180px;
+	/*border: 1px solid red;*/
+}
+
+.left-inner-panel-more a {
+	float: right;
+	color: #555;
+}
+
+.bottom-box {
+	margin-top: 20px;
+	background: #337ab7;
+	height: 100px;
+	width: 100%;
+	padding-top: 40px;
+}
+.bottom-box p{
+	text-align: center;
+	color: white;
+}
+
+.item img {
+	width: 100%;
+}
+
+
+.index-middle {
+	margin-top: 3px;
+}
+
+.index-middle div li a {
+	text-decoration: none;
+	color: #555;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+}
+
+.index-middle div li a:hover {
+	text-decoration: underline;
+}
+
+.index-middle div li {
+	/*border: 1px solid red;*/
+	list-style: none;
+	line-height: 30px;
+}
+
+.index-middle .panel-body{
+	padding: 0;
+}
+
+#personal-center img{
+	width:80px;
+	height: 80px;
+	margin:20px;
+	margin-left: 50px;
+	
+}
+#personal-center{
+	margin-top: 15px;
+}
+.rigtht-more{
+	float: right;
+	color: #555;
+}
+.doc-list li p{
+	color: #555;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	margin-left: 20px;
+}
+#get-more-btn{
+	border: none;
+	background: none;
+	color: #555;
+	outline: none;
+}
+#get-more-btn-p{
+	text-align: center;
+}
+.small-photo{
+	width: 20px;
+	height: 20px;
+}
+#login-box{
+	width: 400px;
+	/*border: 1px solid #337ab7;*/
+	position: fixed;
+	top: 150px;
+	left: 200px;
+	z-index: 100;
+	display: none;
+}
+.glyphicon-remove{
+	float: right;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+

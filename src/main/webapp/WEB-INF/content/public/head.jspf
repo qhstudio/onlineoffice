@@ -1,0 +1,42 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<div class="container-fluid">
+	<div class="row">
+		<!-- top -->
+		<div class="col-md-12">
+			<div class="body-top">
+				<p>
+					<a href="javascript:onclick=showLoginBox()">登录</a> <a
+						href="javascript:onclick=showRegisterBox()">注册</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<!-- search -->
+		<div class="col-md-3"></div>
+		<div class="col-md-9">
+			<div class="search-form-box">
+				<form action="">
+					<div class="logo-box"></div>
+					<div class="input-search-box">
+						<input type="search" class="input-search-input"
+							placeholder="搜索文档">
+						<button type="submit" class="input-search-btn">
+							<i class="glyphicon glyphicon-search"></i> 搜索
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="search-nav">
+			<a href="main/index"> 首页 </a>
+			<a href="main/recent"> 最新上传 </a> 
+			<a href="main/hot"> 热门文档 </a> 
+			<a href="main/all-type"> 所有分类 </a> 
+			<a href="model.jsp"> 帮助 </a>
+		</div>
+	</div>
+</div>
