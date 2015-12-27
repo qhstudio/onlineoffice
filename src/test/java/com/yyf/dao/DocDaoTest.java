@@ -1,5 +1,6 @@
 package com.yyf.dao;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort.Direction;
 import com.yyf.model.Comment;
 import com.yyf.model.Doc;
 import com.yyf.model.User;
+import com.yyf.utils.FileUtil;
 
 public class DocDaoTest {
 
@@ -39,7 +41,11 @@ public class DocDaoTest {
 	
 	@Test
 	public void testDel() {
-		dao.delete(12l);
+		Doc doc = dao.findOne(112l);
+//		dao.delete(doc);
+		File file = new File(FileUtil.RootPath+doc.getDocPath()+".png");
+		file.delete();
+		System.out.println(file);
 	}
 	
 	@Test
@@ -59,9 +65,9 @@ public class DocDaoTest {
 	public void testFindAllByCondation() {
 		
 		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "docDate"));
-		Page<Doc> page = dao.findByOwnUserId(1l, pageable);
+		Page<Doc> page = dao.findByDocAuthorityGreaterThan(2, pageable);
 		for(Doc d:page.getContent()){
-			System.out.println(d.getDocName()+" "+d.getDocOwnUser().getUserName());
+			System.out.println(d.getDocName()+" "+d.getDocAuthority());
 		}
 	}
 	

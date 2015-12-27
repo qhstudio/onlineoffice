@@ -121,13 +121,13 @@ public class DocAction extends BaseAction{
 	public String doMyDocList() throws Exception {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		page = docSevice.getMyDocs(user.getUserId(),getPageNum(),DEFAULT_PAGE_SIZE);
-		String path = ServletActionContext.getServletContext().getRealPath("/upload/photo/");
-		System.out.println(path);
+//		String path = ServletActionContext.getServletContext().getRealPath("/upload/photo/");
+//		System.out.println(path);
 		return SUCCESS;
 	}
 	
 	@Action(value = "delete", results = {
-			@Result(name = "success", type = "redirectAction", location = "mydoc-list") })
+			@Result(name = "success", type = "chain", location = "mydoc-list") })
 	public String delete() throws Exception {
 		if(docId != null){
 			User user = (User) ActionContext.getContext().getSession().get("user");
@@ -165,7 +165,7 @@ public class DocAction extends BaseAction{
 	}
 	
 	
-	@Action(value="add-doc-info",results={@Result(name="success",type="dispatcher",location="/model.jsp")})
+	@Action(value="add-doc-info",results={@Result(name="success",type="redirectAction",location="mydoc-list")})
 	public String addDocInfo(){
 		Doc innerDoc = docSevice.getDocById(docId);
 		DocType docType = new DocType();
@@ -175,7 +175,6 @@ public class DocAction extends BaseAction{
 		innerDoc.setDocName(docName);
 		innerDoc.setDocType(docType);
 		docSevice.addDoc(innerDoc);
-		System.out.println(innerDoc);
 		return SUCCESS;
 	}
 

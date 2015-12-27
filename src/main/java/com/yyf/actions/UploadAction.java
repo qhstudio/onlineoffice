@@ -17,6 +17,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.yyf.exception.NoUserExcetion;
 import com.yyf.model.Doc;
 import com.yyf.model.User;
 import com.yyf.service.DocSevice;
@@ -87,18 +88,28 @@ public class UploadAction extends ActionSupport {
 	public String execute() throws Exception {
 		User user = (User) ActionContext.getContext().getSession().get("user");
 		if(user == null){
-			return "nouser";
+			throw new NoUserExcetion();
 		}
+		Doc doc = docSevice.getDocById(docId);
+		if(null != doc.getDocPath()){
+			File file = new File(FileUtil.RootPath+doc.getDocPath());
+			FileUtil.delete(file);
+			file = new File(FileUtil.RootPath+doc.getDocPath()+".pdf");
+			FileUtil.delete(file);
+			file = new File(FileUtil.RootPath+doc.getDocPath()+".swf");
+			FileUtil.delete(file);
+		}
+		
 		String uri = user.getUserId()+"/document/";
-		File f=new File("G:/upload/"+uri);
+		File f=new File(FileUtil.RootPath+uri);
 		f.mkdirs();
 		
 		String ext = FileUtil.getFileExt(fileName);
 		uri += UUID.randomUUID().toString() + "." + ext;
-		FileUtil.saveFile(new FileInputStream(file), new File("G:/upload/"+uri));
+		FileUtil.saveFile(new FileInputStream(file), new File(FileUtil.RootPath+uri));
 		
-//		System.out.println(docId+" "+fileName);
-		Doc doc = docSevice.getDocById(docId);
+		
+		
 		doc.setDocDate(new Date());
 		doc.setDocName(fileName);
 		doc.setDocFoot(ext);
@@ -113,8 +124,8 @@ public class UploadAction extends ActionSupport {
 		boolean isOffice = convert.isOfficeFile(fileName);
 		if(isOffice){
 			new Thread().start();
-			convert.convertToPDF( new File("G:/upload/"+uri),  new File("G:/upload/"+uri+".pdf"));
-			convert.convertToSWF(new File("G:/upload/"+uri+".pdf"), new File("G:/upload/"+uri+".swf"));
+			convert.convertToPDF( new File(FileUtil.RootPath+uri),  new File(FileUtil.RootPath+uri+".pdf"));
+			convert.convertToSWF(new File(FileUtil.RootPath+uri+".pdf"), new File(FileUtil.RootPath+uri+".swf"));
 			System.out.println("转换成功");
 		}
 		

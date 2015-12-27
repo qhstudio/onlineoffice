@@ -16,6 +16,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.struts2.ServletActionContext;
+
 /**
  * 文件和流的基本操作
  * 
@@ -24,6 +26,11 @@ import java.util.zip.ZipOutputStream;
  */
 
 public final class FileUtil {
+
+	/**
+	 * 文件磁盘根目录
+	 */
+	public static final String RootPath = "G://upload/";
 
 	private FileUtil() {
 	}

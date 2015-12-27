@@ -13,6 +13,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import com.opensymphony.xwork2.ActionSupport;
 import com.yyf.model.Doc;
 import com.yyf.service.DocSevice;
+import com.yyf.utils.FileUtil;
 
 @Namespace("/doc")
 @ParentPackage("default")
@@ -38,7 +39,7 @@ public class DownLoadAction extends ActionSupport {
 		Doc doc = docSevice.getDocById(docId);
 		fileName = doc.getDocName();
 		contentType = doc.getDocContentType();
-		File file = new File("G://upload/"+doc.getDocPath()+ext);
+		File file = new File(FileUtil.RootPath+doc.getDocPath()+ext);
 		inputStream = new FileInputStream(file);
 		size = file.length();
 //		System.out.println("G://upload/"+doc.getDocPath()+ext);

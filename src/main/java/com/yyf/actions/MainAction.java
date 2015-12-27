@@ -11,8 +11,10 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.data.domain.Page;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.yyf.base.BaseAction;
 import com.yyf.model.Doc;
+import com.yyf.model.User;
 import com.yyf.service.DocSevice;
 import com.yyf.service.UserService;
 
@@ -104,7 +106,9 @@ public class MainAction extends BaseAction {
 		if (pageNum == null) {
 			pageNum = DEFAULT_PAGE_NUM;
 		}
-		Page<Doc> page = docSevice.getDocPage(pageNum, DEFAULT_PAGE_SIZE);
+		
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		Page<Doc> page = docSevice.getDocRecentPage(pageNum, DEFAULT_PAGE_SIZE,user);
 		dataMap.put("docs", page);
 		return SUCCESS;
 	}

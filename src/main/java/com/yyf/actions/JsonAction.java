@@ -52,7 +52,6 @@ public class JsonAction extends ActionSupport {
 	@Action(value = "json-users")
 	public String json() throws Exception {
 		dataMap.put("users", userService.getUsers());
-		System.out.println(userService.getUsers());
 		return "json";
 	}
 	/**

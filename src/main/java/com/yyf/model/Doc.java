@@ -135,6 +135,7 @@ public class Doc {
 		this.docPath = docPath;
 	}
 
+	@JSON(serialize=false)
 	public DocType getDocType() {
 		return docType;
 	}
@@ -168,14 +169,5 @@ public class Doc {
 	public void setDocForkers(Set<User> docForkers) {
 		this.docForkers = docForkers;
 	}
-
-	@Override
-	public String toString() {
-		return "Doc [docId=" + docId + ", docName=" + docName + ", docSize=" + docSize + ", docDate=" + docDate
-				+ ", docDesc=" + docDesc + ", docPath=" + docPath + ", docFoot=" + docFoot + ", docAuthority="
-				+ docAuthority + ", docType=" + docType + ", docOwnUser=" + docOwnUser + "]";
-	}
 	
-	
-
 }

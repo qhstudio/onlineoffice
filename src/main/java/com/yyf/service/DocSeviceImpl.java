@@ -1,5 +1,7 @@
 package com.yyf.service;
 
+import java.io.File;
+
 import javax.annotation.Resource;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yyf.dao.DocDao;
 import com.yyf.exception.NoUserExcetion;
 import com.yyf.model.Doc;
+import com.yyf.model.User;
+import com.yyf.utils.FileUtil;
 
 @Service("DocService")
 public class DocSeviceImpl implements DocSevice {
@@ -22,9 +26,13 @@ public class DocSeviceImpl implements DocSevice {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Doc> getDocPage(Integer pageNum, int defaultPageSize) {
+	public Page<Doc> getDocRecentPage(Integer pageNum, int defaultPageSize,User user) {
 		Pageable pageable = new PageRequest(pageNum, defaultPageSize, new Sort(Direction.DESC, "docDate"));
-		return dao.findAll(pageable);
+		int authority = 2;
+		if(user!=null){
+			authority = 3;
+		}
+		return dao.findByDocAuthorityGreaterThan(authority, pageable);
 	}
 
 	@Override
@@ -47,6 +55,12 @@ public class DocSeviceImpl implements DocSevice {
 	public void delete(Long userId, Long docId) throws Exception {
 		Doc doc= dao.findOne(docId);
 		if(userId == doc.getDocOwnUser().getUserId()){
+			File file = new File(FileUtil.RootPath+doc.getDocPath());
+			FileUtil.delete(file);
+			file = new File(FileUtil.RootPath+doc.getDocPath()+".pdf");
+			FileUtil.delete(file);
+			file = new File(FileUtil.RootPath+doc.getDocPath()+".swf");
+			FileUtil.delete(file);
 			dao.delete(docId);
 		}else{
 			throw new NoUserExcetion();

@@ -17,7 +17,7 @@
 				</ol>
 			</div>
 			<div class="panel-body">
-				<ul class="list-group doc-list">
+				<ul class="list-group doc-list" id="doc-list-ul">
 
 				</ul>
 				<p id="get-more-btn-p">
@@ -35,8 +35,7 @@
 	function getMoreResult() {
 		$.post("main/recentListInfo",{
 							pageNum : nowPage,
-						},
-						function(data) {
+						},function(data) {
 							if(data.docs.length < 10){
 								$("#get-more-btn").parent().append("没有更多");
 								$("#get-more-btn").remove();
@@ -51,7 +50,7 @@
 										+ data.docs[i].docDate
 										+ " </p><p>"
 										+ data.docs[i].docDesc + "</p></li>";
-								$(".doc-list").eq(0).append(str);
+								$("#doc-list-ul").append(str);
 							}
 						});
 		nowPage++;

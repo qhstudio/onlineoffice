@@ -12,6 +12,9 @@ import com.yyf.model.Doc;
  *
  */
 public interface DocDao extends PagingAndSortingRepository<Doc,Long>{
+	 @Query("select d from Doc d where d.docAuthority < ?1") 
+	 public Page<Doc> findByDocAuthorityGreaterThan(Integer docAuthority,Pageable pageable); 
+	 
 	 @Query("select d from Doc d where d.docOwnUser.userId = ?1") 
 	 public Page<Doc> findByOwnUserId(Long ownUserId,Pageable pageable); 
 	 

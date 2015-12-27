@@ -3,12 +3,13 @@ package com.yyf.service;
 import org.springframework.data.domain.Page;
 
 import com.yyf.model.Doc;
+import com.yyf.model.User;
 
 public interface DocSevice {
 	/**
 	 * 获得分页列表
 	 */
-	Page<Doc> getDocPage(Integer pageNum, int defaultPageSize);
+	Page<Doc> getDocRecentPage(Integer pageNum, int defaultPageSize,User user);
 
 	Doc addDoc(Doc doc);
 

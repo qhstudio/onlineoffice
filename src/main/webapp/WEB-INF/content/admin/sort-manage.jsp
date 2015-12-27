@@ -45,8 +45,6 @@
 						for (var i = 0; i < data.doctypes.length; i++) {
 							var cstr = "";
 							for (var j = 0; j < data.doctypes[i].childrenDocType.length; j++) {
-								console
-										.log(data.doctypes[i].childrenDocType[j].typeName);
 								cstr += "<a class='btn btn-info btn-sm' data-toggle='modal' data-target='.bs-example-modal-sm'>"
 										+"<i class='type-id hidden-content'>"+data.doctypes[i].childrenDocType[j].typeId+"</i>"+ data.doctypes[i].childrenDocType[j].typeName
 										+ "</a> ";
