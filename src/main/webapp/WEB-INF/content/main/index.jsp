@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/content/public/commons.jspf"%>
 <style type="text/css">
-.left-inner-panel-content p{
-	padding:0;
-	margin:0;
+.left-inner-panel-content p {
+	padding: 0;
+	margin: 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -22,9 +22,7 @@
 		<div class="row">
 			<!--描述：分类-->
 			<div class="col-md-3">
-				<div class="left-nav"id="left-nav">
-					
-				</div>
+				<div class="left-nav" id="left-nav"></div>
 			</div>
 			<div class="col-md-9 right-nav">
 				<!--描述：焦点图-->
@@ -112,14 +110,21 @@
 					<div class="panel-body">
 						<div class="row" id="personal-center">
 							<div class="col-md-5">
-								<p align="center">${user.userName }</p>
-								<img src="img/pass.png" alt="..." class="img-thumbnail">
-
+								<s:if test="#session.user != null">
+									<p align="center">${user.userName}</p>
+									<img src="upload/photo/${user.userId}.png"
+										class="img-thumbnail">
+								</s:if>
 							</div>
 							<div class="col-md-5">
-								<a class="btn btn-block btn-warning" href="doc/upload">上传文档</a>
-								<a class="btn btn-block btn-warning" href="doc/mydoc-list">我的文库</a> <a
-									class="btn btn-block btn-warning">消息 <span class="badge">3</span></a>
+								<s:if test="#session.user == null">
+									<h3>请先登录！</h3>
+								</s:if>
+								<s:else>
+									<a class="btn btn-block btn-warning" href="doc/upload">上传文档</a>
+									<a class="btn btn-block btn-warning" href="doc/mydoc-list">我的文库</a>
+									<a class="btn btn-block btn-warning">消息 <span class="badge">3</span></a>
+								</s:else>
 							</div>
 						</div>
 					</div>
@@ -158,11 +163,11 @@ getMoreResult()
 					cstr +="</p><p>"
 				}
 				
-				cstr += "<a href='"+data.doctypes[i].childrenDocType[j].typeId+"'>"+data.doctypes[i].childrenDocType[j].typeName+"</a> ";
+				cstr += "<a href='main/all-type?searchId="+data.doctypes[i].childrenDocType[j].typeId+"'>"+data.doctypes[i].childrenDocType[j].typeName+"</a> ";
 			}
 			cstr +="</p>";
 			var str = 
-				"<div class='left-inner-panel-head'><a href='"+data.doctypes[i].typeId+"'>"+data.doctypes[i].typeName+"</a>></div><div class='left-inner-panel-content'>"
+				"<div class='left-inner-panel-head'><a href='main/all-type?searchId="+data.doctypes[i].typeId+"'>"+data.doctypes[i].typeName+"</a>></div><div class='left-inner-panel-content'>"
 				+cstr
 				+"</div>";
 				$("#left-nav").append(str);

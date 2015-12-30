@@ -34,6 +34,16 @@ public class User {
 	private Date userDate;
 	private String userPhoto;
 	private String userDesc;
+	private String userPassword;
+	
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
 
 	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "roleId")

@@ -48,17 +48,24 @@ public class JsonAction extends ActionSupport {
 	private UserService userService;
 	@Resource
 	private CommentService commentService;
-	
+
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 
 	private Integer page;
 	private Long docId;
 	private Long parentId;
 	private String commentContext;
-	
-	
-	
-	
+
+	private Long userId;
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	public Long getParentId() {
 		return parentId;
 	}
@@ -99,8 +106,25 @@ public class JsonAction extends ActionSupport {
 		this.dataMap = dataMap;
 	}
 
+	@Action(value = "login", results = { @Result(name = "success", type = "redirect", location = "/main/index"),
+			@Result(name = "input", type = "redirect", location = "/main/index") }
+
+	)
+	public String login() throws Exception {
+		User myuser = userService.getUser(userId);
+		// System.out.println(myuser);
+		if (myuser != null) {
+			ActionContext.getContext().getSession().remove("user");
+			ActionContext.getContext().getSession().put("user", myuser);
+		}
+
+		// dataMap.put("resUser", myuser);
+		return "success";
+	}
+
 	@Action(value = "json-users")
 	public String json() throws Exception {
+
 		dataMap.put("users", userService.getUsers());
 		return "json";
 	}
@@ -117,22 +141,23 @@ public class JsonAction extends ActionSupport {
 		dataMap.put("doctypes", list);
 		return "json";
 	}
-	
+
 	/**
 	 * 得到doc评论
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	@Action(value = "json-doc-comments")
 	public String getDocCommentList() throws Exception {
-		if(page == null){
+		if (page == null) {
 			page = 0;
 		}
 		Page<Comment> cPage = commentService.getCommentPageByDocId(docId, page, 10);
 		dataMap.put("cPage", cPage);
 		return "json";
 	}
-	
+
 	@Action(value = "json-doc-add-comments")
 	public String addDocComment() throws Exception {
 		User user = (User) ActionContext.getContext().getSession().get("user");
@@ -143,15 +168,15 @@ public class JsonAction extends ActionSupport {
 		Doc doc = new Doc();
 		doc.setDocId(docId);
 		c.setCommentDoc(doc);
-		if(parentId!=null){
+		if (parentId != null) {
 			Comment nc = new Comment();
 			nc.setCommentId(parentId);
 			c.setParentComment(nc);
 		}
+		// System.out.println(c);
 		Comment comment = commentService.addComment(c);
 		dataMap.put("comment", comment);
 		return "json";
 	}
-	
-	
+
 }

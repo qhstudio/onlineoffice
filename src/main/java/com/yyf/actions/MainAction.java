@@ -170,6 +170,15 @@ public class MainAction extends BaseAction {
 
 		return SUCCESS;
 	}
+	
+	@Action(value = "login-out", results = {
+			@Result(name = "success", type = "redirectAction", location = "index") })
+	public String doLoginOut() throws Exception {
+		ActionContext.getContext().getSession().remove("user");
+		return SUCCESS;
+	}
+	
+	
 
 	@Action(value = "recentListInfo", results = {
 			@Result(name = "success", type = "json", params = { "root", "dataMap" }) })

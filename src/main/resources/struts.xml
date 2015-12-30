@@ -26,7 +26,7 @@
 		</interceptors>
 		<!-- 重新定义默认的拦截器栈 -->
 		<default-interceptor-ref name="myStack"></default-interceptor-ref>
-		
+
 		<default-action-ref name="index" />
 		<global-results>
 			<result name="down" type="stream">
@@ -38,12 +38,13 @@
 				<param name="contentDisposition">attachment;filename="${fileName}"</param>
 			</result>
 			<result name="nouser">/WEB-INF/content/nouser-error.jsp</result>
+
 		</global-results>
-	<!-- 	<global-exception-mappings>
+		<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception"
-				result="error" />
+				result="nouser" />
 		</global-exception-mappings>
- -->
+
 
 
 		<action name="index">

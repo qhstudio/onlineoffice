@@ -31,18 +31,21 @@
 									<td>${docId }</td>
 									<td>${docName}</td>
 									<td>${docDate }</td>
-									<td>${docType.parentType.typeName } ${docType.typeName }</td>
-									<td><select class="form-control"
-										id="docAuthority${docId }">
+									<td>${docType.parentType.typeName }${docType.typeName }</td>
+									<td><select class="form-control" id="docAuthority${docId}"
+										onchange="changeDocAuthority(${docId },this)">
 											<option value="1">公开</option>
 											<option value="2">会员</option>
 											<option value="3">仅自己</option>
 									</select> <script type="text/javascript">
-										$("#docAuthority${docId}").val(
-												'${docAuthority}');
-									</script></td>
-									<td><a href="doc/delete?docId=${docId }&pageNum=${page.number}" class="btn btn-danger btn-sm">删除</a> <a
-										href="doc/upload?docId=${docId }" class="btn btn-warning btn-sm">修改</a> <a
+										$("#docAuthority${docId}").val('${docAuthority}');
+										
+									</script>
+									<td><a
+										href="doc/delete?docId=${docId }&pageNum=${page.number}"
+										class="btn btn-danger btn-sm">删除</a> <a
+										href="doc/upload?docId=${docId }"
+										class="btn btn-warning btn-sm">修改</a> <a
 										href="main/doc-result.action?docId=${docId }"
 										class="btn btn-info btn-sm">查看</a></td>
 								</tr>
@@ -58,8 +61,8 @@
 	</div>
 
 	<%@ include file="/WEB-INF/content/public/footer.jspf"%>
+	<script type="text/javascript" src="js/common.js"></script>
 </body>
-<script type="text/javascript">
-	$("#left-list-nav").find("a").eq(3).addClass("active");
-</script>
 </html>
+
+

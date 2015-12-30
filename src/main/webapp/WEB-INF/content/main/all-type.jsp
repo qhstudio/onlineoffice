@@ -16,10 +16,6 @@
 					<li class="active">所有分类</li>
 				</ol>
 				<table class="table doc-table table-condensed" id="sort-list">
-					<tr>
-						<th>类型</th>
-						<th>子类型</th>
-					</tr>
 				</table>
 			</div>
 			<div class="panel-body">
@@ -32,13 +28,18 @@
 			</div>
 		</div>
 	</div>
-
+	<input type="hidden" value="${param.searchId}" id="searchId">
 	<%@ include file="/WEB-INF/content/public/footer.jspf"%>
 </body>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
-	var searchId = 0;
+	var searchId = $("#searchId").val();
+	
 	var nowPage = 0;
+	
+	if(searchId == null || searchId.trim()==""){
+		searchId = 0;
+	}
 	
 	function getMoreResult() {
 		docTypeId = searchId;
@@ -160,5 +161,7 @@
 		getMoreResult();
 
 	}
+	
+	 getMoreResult();
 </script>
 </html>

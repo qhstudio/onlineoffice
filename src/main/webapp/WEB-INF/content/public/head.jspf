@@ -1,12 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <div class="container-fluid">
 	<div class="row">
 		<!-- top -->
 		<div class="col-md-12">
 			<div class="body-top">
 				<p>
-					<a href="javascript:onclick=showLoginBox()">登录</a> <a
-						href="javascript:onclick=showRegisterBox()">注册</a>
+					<s:if test="#session.user == null">
+						<a href="javascript:onclick=showLoginBox()">登录</a>
+						 <a href="javascript:onclick=showRegisterBox()">注册</a>
+					</s:if>
+					<s:else>
+						<a href="doc/mydoc-list">用户：${user.userName}</a>
+						 <a href="main/login-out">退出</a>
+					</s:else>
 				</p>
 			</div>
 		</div>

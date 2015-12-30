@@ -13,3 +13,4 @@ function showLoginBox() {
 function closeNode(mythis){
 	$(mythis).parent().parent().parent().hide("fast");
 }
+

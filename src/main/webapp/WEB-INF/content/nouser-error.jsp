@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/content/public/head.jspf"%>
-	<!-- 请先登录  -->
+	<h1>请先登录 !</h1>
 	<%@ include file="/WEB-INF/content/public/footer.jspf"%>
 </body>
 </html>

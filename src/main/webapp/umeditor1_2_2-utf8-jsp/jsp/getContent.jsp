@@ -7,9 +7,6 @@
 request.setCharacterEncoding("utf-8");
 response.setCharacterEncoding("utf-8");
 String content = request.getParameter("myEditor");
-
-
-
 response.getWriter().print("<div class='content'>"+content+"</div>");
 
 %>

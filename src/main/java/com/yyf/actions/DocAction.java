@@ -164,6 +164,18 @@ public class DocAction extends BaseAction{
 		return SUCCESS;
 	}
 	
+	@Action(value = "change-au", results = {@Result(name = "success", type = "json", params = { "root", "upDoc" })})
+	public String docChangeAu() throws Exception {
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		if(user == null){
+			return "nouser";
+		}
+		Doc doc = docSevice.getDocById(docId);
+		doc.setDocAuthority(docAuthority);
+		upDoc = docSevice.addDoc(doc);
+		return SUCCESS;
+	}
+	
 	
 	@Action(value="add-doc-info",results={@Result(name="success",type="redirectAction",location="mydoc-list")})
 	public String addDocInfo() throws Exception{
