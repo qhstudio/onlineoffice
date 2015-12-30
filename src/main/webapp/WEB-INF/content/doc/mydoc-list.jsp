@@ -21,7 +21,6 @@
 							<tr>
 								<th>文档编号</th>
 								<th>名称</th>
-								<th>上传用户</th>
 								<th>上传时间</th>
 								<th>类别</th>
 								<th>浏览权限</th>
@@ -31,9 +30,8 @@
 								<tr>
 									<td>${docId }</td>
 									<td>${docName}</td>
-									<td>${docOwnUser.userName }</td>
 									<td>${docDate }</td>
-									<td>${docType.parentType.typeName }:<br>${docType.typeName }</td>
+									<td>${docType.parentType.typeName } ${docType.typeName }</td>
 									<td><select class="form-control"
 										id="docAuthority${docId }">
 											<option value="1">公开</option>

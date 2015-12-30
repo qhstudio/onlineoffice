@@ -39,11 +39,11 @@
 			</result>
 			<result name="nouser">/WEB-INF/content/nouser-error.jsp</result>
 		</global-results>
-		<global-exception-mappings>
+	<!-- 	<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception"
 				result="error" />
 		</global-exception-mappings>
-
+ -->
 
 
 		<action name="index">

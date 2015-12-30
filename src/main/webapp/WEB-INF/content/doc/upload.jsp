@@ -73,11 +73,7 @@
 									<select class="form-control" name="typeId" id="childType">
 									</select>
 									<script type="text/javascript">
-										if ($("#docId").val() != null
-												&& $("#docId").val().trim() != '') {
-											$("#childType").val(
-													'${upDoc.docType.typeId}');
-										}
+										
 									</script>
 								</div>
 								<div class="col-sm-2">请选择类型</div>
@@ -106,7 +102,7 @@
 								<label for="inputDocName" class="col-sm-2 control-label">文档说明</label>
 								<div class="col-sm-8">
 									<textarea class="form-control" id="doc-desc" rows="3"
-										name="docDesc" placeholder="请对文档进行简要的说明"> ${upDoc.docDesc }</textarea>
+										name="docDesc" placeholder="请对文档进行简要的说明">${upDoc.docDesc }</textarea>
 								</div>
 								<div class="col-sm-2">请输入文档说明</div>
 							</div>
@@ -167,7 +163,7 @@
 
 	//startUpload
 	uploader.on('error', function(type) {
-		if (type == 'fileSizeLimit') {
+		if (type == 'Q_EXCEED_SIZE_LIMIT') {
 			alert('文件大小太大');
 		} else if (type == 'Q_TYPE_DENIED') {
 			alert('文件类型不支持');
@@ -274,6 +270,9 @@
 	var type_data;
 	$.post("json/json-doc-types", function(data) {
 		type_data = data;
+		
+		
+		
 		for (var i = 0; i < data.doctypes.length; i++) {
 			var str = "<option value="+data.doctypes[i].typeId+">"+data.doctypes[i].typeName+"</option>";
 			$("#parent-type").append(str);
@@ -288,49 +287,61 @@
 		 	var str = "<option value="+type_data.doctypes[0].childrenDocType[j].typeId+">"+type_data.doctypes[0].childrenDocType[j].typeName+"</option>";
 			$("#childType").append(str);
 		}
-	});
-	
-	
-	
-	$("#parent-type").change(function(){
-		$("#childType").html("");
 		
-		var key = $(this).val();
-		for (var i = 0; i < type_data.doctypes.length; i++) {
-			if(key == type_data.doctypes[i].typeId){
-				var str1 = "<option value="+type_data.doctypes[i].typeId+">"+type_data.doctypes[i].typeName+"</option>";
-				$("#childType").append(str1);
-				for (var j = 0; j < type_data.doctypes[i].childrenDocType.length; j++) {
-					 	var str = "<option value="+type_data.doctypes[i].childrenDocType[j].typeId+">"+type_data.doctypes[i].childrenDocType[j].typeName+"</option>";
-						$("#childType").append(str);
+		$("#parent-type").change(function(){
+			$("#childType").html("");
+			
+			var key = $(this).val();
+			for (var i = 0; i < type_data.doctypes.length; i++) {
+				if(key == type_data.doctypes[i].typeId){
+					var str1 = "<option value="+type_data.doctypes[i].typeId+">"+type_data.doctypes[i].typeName+"</option>";
+					$("#childType").append(str1);
+					for (var j = 0; j < type_data.doctypes[i].childrenDocType.length; j++) {
+						 	var str = "<option value="+type_data.doctypes[i].childrenDocType[j].typeId+">"+type_data.doctypes[i].childrenDocType[j].typeName+"</option>";
+							$("#childType").append(str);
+					}
+					break;
 				}
-				break;
 			}
+			
+		});
+		
+		if ($("#docId").val() != null && $("#docId").val().trim() != '') {
+			
+				$("#parent-type").val('${upDoc.docType.parentType.typeId}');
+				
+				
+				
+				if($("#parent-type").val() == null || $("#parent-type").val().trim() == ''){
+					$("#parent-type").val('${upDoc.docType.typeId}');
+				}
+				
+				$("#childType").html("");
+				var key = $("#parent-type").val();
+				for (var i = 0; i < type_data.doctypes.length; i++) {
+					if(key == type_data.doctypes[i].typeId){
+						var str1 = "<option value="+type_data.doctypes[i].typeId+">"+type_data.doctypes[i].typeName+"</option>";
+						$("#childType").append(str1);
+						for (var j = 0; j < type_data.doctypes[i].childrenDocType.length; j++) {
+							 	var str = "<option value="+type_data.doctypes[i].childrenDocType[j].typeId+">"+type_data.doctypes[i].childrenDocType[j].typeName+"</option>";
+								$("#childType").append(str);
+						}
+						break;
+					}
+				}
+				
+				$("#childType").val(
+						'${upDoc.docType.typeId}');
+		}else{
+			
 		}
 		
 	});
 	
-	/*
-	for (var i = 0; i < data.doctypes.length; i++) {
-		var cstr = "";
-		for (var j = 0; j < data.doctypes[i].childrenDocType.length; j++) {
-			cstr += "<a class='btn btn-info btn-sm' data-toggle='modal' data-target='.bs-example-modal-sm'>"
-					+ "<i class='type-id hidden-content'>"
-					+ data.doctypes[i].childrenDocType[j].typeId
-					+ "</i>"
-					+ data.doctypes[i].childrenDocType[j].typeName
-					+ "</a> ";
-		}
-		var str = "<tr><td>"
-				+ "<a class='btn btn-primary btn-sm'>"
-				+ data.doctypes[i].typeName
-				+ "</a>"
-				+ "</td>"
-				+ "<td>"
-				+ cstr
-				+ "</td>"
-				+ "<td><a class='btn btn-danger btn-sm'  data-toggle='modal' data-target='.bs-example-modal-sm'><i class='glyphicon glyphicon-plus'></i>增加</a></td></tr>";
-		$("#sort-list").append(str);
-	}*/
+	
+	
+	
+	
+	
 </script>
 </html>

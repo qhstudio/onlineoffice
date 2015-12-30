@@ -18,5 +18,18 @@ public class DocTypeServiceImpl implements DocTypeService {
 	public List<DocType> getParentsType() {
 		return docTypeDao.findByParentTypeIsNull();
 	}
+
+	@Override
+	public DocType saveDocType(DocType model) {
+		if(model.getParentType() != null && model.getTypeId() == model.getParentType().getTypeId()){
+			model.setParentType(null);
+		}
+		return docTypeDao.save(model);
+	}
+
+	@Override
+	public void delete(DocType model) {
+		docTypeDao.delete(model.getTypeId());
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.yyf.actions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -35,12 +36,38 @@ public class MainAction extends BaseAction {
 
 	@Resource
 	private DocSevice docSevice;
-	
+
 	@Resource
 	private UserService userService;
 	private Long docId;
+	private Long docTypeId;
 	private Doc doc;
-	
+	private String searchInfo;
+	private List<Doc> resultList;
+
+	public List<Doc> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<Doc> resultList) {
+		this.resultList = resultList;
+	}
+
+	public String getSearchInfo() {
+		return searchInfo;
+	}
+
+	public void setSearchInfo(String searchInfo) {
+		this.searchInfo = searchInfo;
+	}
+
+	public Long getDocTypeId() {
+		return docTypeId;
+	}
+
+	public void setDocTypeId(Long docTypeId) {
+		this.docTypeId = docTypeId;
+	}
 
 	public Doc getDoc() {
 		return doc;
@@ -83,7 +110,7 @@ public class MainAction extends BaseAction {
 	@Action(value = "index", results = {
 			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/main/index.jsp") })
 	public String doIndex() throws Exception {
-		
+
 		return SUCCESS;
 	}
 
@@ -100,19 +127,75 @@ public class MainAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	/**
+	 * 跳转到热门文档
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value = "hot", results = {
+			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/main/hot.jsp") })
+	public String doHot() throws Exception {
+
+		return SUCCESS;
+	}
+
+	/**
+	 * 跳转到搜索结果页面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value = "search-doc", results = {
+			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/main/search-result.jsp") })
+	public String doSearchReslt() throws Exception {
+		if (searchInfo == null || searchInfo.trim().equals("")) {
+			resultList = null;
+		} else {
+			resultList = docSevice.getSearchResult(searchInfo);
+		}
+
+		return SUCCESS;
+	}
+
+	/**
+	 * 跳转到分类页面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value = "all-type", results = {
+			@Result(name = "success", type = "dispatcher", location = "/WEB-INF/content/main/all-type.jsp") })
+	public String doGetAllTypeUI() throws Exception {
+
+		return SUCCESS;
+	}
+
 	@Action(value = "recentListInfo", results = {
 			@Result(name = "success", type = "json", params = { "root", "dataMap" }) })
 	public String doGetRecentList() {
 		if (pageNum == null) {
 			pageNum = DEFAULT_PAGE_NUM;
 		}
-		
+
 		User user = (User) ActionContext.getContext().getSession().get("user");
-		Page<Doc> page = docSevice.getDocRecentPage(pageNum, DEFAULT_PAGE_SIZE,user);
+		Page<Doc> page = docSevice.getDocRecentPage(pageNum, DEFAULT_PAGE_SIZE, user);
 		dataMap.put("docs", page);
 		return SUCCESS;
 	}
-	
+
+	@Action(value = "recentListInfoByType", results = {
+			@Result(name = "success", type = "json", params = { "root", "dataMap" }) })
+	public String doGetRecentListByType() {
+		if (pageNum == null) {
+			pageNum = DEFAULT_PAGE_NUM;
+		}
+		User user = (User) ActionContext.getContext().getSession().get("user");
+		Page<Doc> page = docSevice.getDocRecentPageByType(pageNum, DEFAULT_PAGE_SIZE, user, docTypeId);
+		dataMap.put("docs", page);
+		return SUCCESS;
+	}
+
 	/**
 	 * 跳转到我的文档
 	 * 

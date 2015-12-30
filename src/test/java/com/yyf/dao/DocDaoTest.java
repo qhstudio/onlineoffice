@@ -55,6 +55,16 @@ public class DocDaoTest {
 		}
 			
 	}
+	
+	@Test
+	public void findOneByCondationType() {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "docDate"));
+		Page<Doc> page = dao.findByDocAuthorityGreaterThanAndDocType(3, 18l,3, 18l, pageable);
+		for(Doc d:page.getContent()){
+			System.out.println(d.getDocName()+" "+d.getDocAuthority());
+		}
+	}
+	
 	@Test
 	public void findOneByCondation() {
 		Doc d = dao.findByOwnUserId(2l);

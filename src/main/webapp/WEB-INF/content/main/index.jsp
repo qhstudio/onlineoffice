@@ -5,6 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/content/public/commons.jspf"%>
+<style type="text/css">
+.left-inner-panel-content p{
+	padding:0;
+	margin:0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/content/public/head.jspf"%>
@@ -13,48 +22,8 @@
 		<div class="row">
 			<!--描述：分类-->
 			<div class="col-md-3">
-				<div class="left-nav">
-					<div class="left-inner">
-						<div class="left-inner-panel-head">
-							<a href="#">生活悠闲</a>>
-						</div>
-						<div class="left-inner-panel-content">
-							<a href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a> <a
-								href="#">运动健身</a> <a href="#">运动健身</a> <a href="#">运动健身</a>
-						</div>
-					</div>
-					<div class="left-inner">
-						<div class="left-inner-panel-head">
-							<a href="#">生活悠闲</a>>
-						</div>
-						<div class="left-inner-panel-content">
-							<a href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a> <a
-								href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a>
-						</div>
-					</div>
-					<div class="left-inner">
-						<div class="left-inner-panel-head">
-							<a href="#">生活悠闲</a>>
-						</div>
-						<div class="left-inner-panel-content">
-							<a href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a> <a
-								href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a>
-						</div>
-					</div>
-					<div class="left-inner">
-						<div class="left-inner-panel-head">
-							<a href="#">生活悠闲</a>>
-						</div>
-						<div class="left-inner-panel-content">
-							<a href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a> <a
-								href="#">美食食谱</a> <a href="#">游戏攻略</a> <a href="#">运动健身</a>
-						</div>
-					</div>
-					<div class="left-inner">
-						<div class="left-inner-panel-more">
-							<a href="admin/sort-manage">查看更多</a>
-						</div>
-					</div>
+				<div class="left-nav"id="left-nav">
+					
 				</div>
 			</div>
 			<div class="col-md-9 right-nav">
@@ -177,5 +146,31 @@ function getMoreResult() {
 						});
 	}
 getMoreResult()
+
+	var type_data;
+	$.post("json/json-doc-types", function(data) {
+		var len = (data.doctypes.length>4)?4:data.doctypes.length;
+		for (var i = 0; i < len; i++) {
+			var cstr = "<p>";
+			var ilen = (data.doctypes[i].childrenDocType.length>6)?6:data.doctypes[i].childrenDocType.length;
+			for (var j = 0; j < ilen; j++) {
+				if(j==ilen/2){
+					cstr +="</p><p>"
+				}
+				
+				cstr += "<a href='"+data.doctypes[i].childrenDocType[j].typeId+"'>"+data.doctypes[i].childrenDocType[j].typeName+"</a> ";
+			}
+			cstr +="</p>";
+			var str = 
+				"<div class='left-inner-panel-head'><a href='"+data.doctypes[i].typeId+"'>"+data.doctypes[i].typeName+"</a>></div><div class='left-inner-panel-content'>"
+				+cstr
+				+"</div>";
+				$("#left-nav").append(str);
+		}
+	});
+	
+	
+
+
 </script>
 </html>

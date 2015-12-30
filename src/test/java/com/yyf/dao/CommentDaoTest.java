@@ -7,6 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 import com.yyf.model.Comment;
 import com.yyf.model.Doc;
@@ -30,6 +35,20 @@ public class CommentDaoTest {
 	@Test
 	public void test() {
 
+	}
+	
+	@Test
+	public void testGetPage() {
+		Pageable pageable = new PageRequest(0, 10, new Sort(Direction.DESC, "commentTime"));
+		Page<Comment> page = dao.findByCommentDoc(152l, pageable);
+		for(Comment c:page.getContent()){
+			System.out.println(c.getCommentId()+" "+c.getCommentContext());
+			System.out.println(c.getParentComment() == null?"无":c.getParentComment().getCommentContext());
+//			for(Comment i:c.getChildrenComment()){
+//				System.out.println("children:"+i.getCommentId()+" "+i.getCommentContext());
+//			}
+			System.out.println("---------------------------");
+		}
 	}
 	
 	/**

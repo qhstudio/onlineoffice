@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 @Entity
 @Table(name = "comment_info")
 public class Comment {
@@ -62,7 +64,7 @@ public class Comment {
 	public void setCommentContext(String commentContext) {
 		this.commentContext = commentContext;
 	}
-
+	@JSON(serialize=false)
 	public Doc getCommentDoc() {
 		return commentDoc;
 	}
@@ -71,6 +73,7 @@ public class Comment {
 		this.commentDoc = commentDoc;
 	}
 
+	@JSON(format="yyyy年MM月dd日 HH:mm:ss")
 	public Date getCommentTime() {
 		return commentTime;
 	}
@@ -94,5 +97,13 @@ public class Comment {
 	public void setParentComment(Comment parentComment) {
 		this.parentComment = parentComment;
 	}
+
+	@Override
+	public String toString() {
+		return "Comment [commentId=" + commentId + ", commentContext=" + commentContext + ", commentTime=" + commentTime
+				+ ", commentUser=" + commentUser + ", parentComment=" + parentComment + "]";
+	}
+	
+	
 
 }

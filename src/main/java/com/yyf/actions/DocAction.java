@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Page;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.yyf.base.BaseAction;
+import com.yyf.lucene.CreateIndex;
 import com.yyf.model.Doc;
 import com.yyf.model.DocType;
 import com.yyf.model.User;
@@ -36,7 +36,7 @@ public class DocAction extends BaseAction{
 	private String docDesc;
 	private Page<Doc> page;
 	private List<DocType> typeList;
-	
+	private CreateIndex ci = new CreateIndex();
 	
 	public List<DocType> getTypeList() {
 		return typeList;
@@ -166,7 +166,7 @@ public class DocAction extends BaseAction{
 	
 	
 	@Action(value="add-doc-info",results={@Result(name="success",type="redirectAction",location="mydoc-list")})
-	public String addDocInfo(){
+	public String addDocInfo() throws Exception{
 		Doc innerDoc = docSevice.getDocById(docId);
 		DocType docType = new DocType();
 		docType.setTypeId(typeId);
@@ -174,7 +174,12 @@ public class DocAction extends BaseAction{
 		innerDoc.setDocDesc(docDesc);
 		innerDoc.setDocName(docName);
 		innerDoc.setDocType(docType);
-		docSevice.addDoc(innerDoc);
+		try {
+//			System.out.println(innerDoc);
+			docSevice.addDoc(innerDoc,1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 

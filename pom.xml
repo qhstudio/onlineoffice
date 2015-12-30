@@ -132,7 +132,7 @@
 			<artifactId>jodconverter</artifactId>
 			<version>2.2.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.github.livesense</groupId>
 			<artifactId>jodconverter-core</artifactId>
@@ -146,6 +146,35 @@
 			<version>1.2.2</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/umeditor1_2_2-utf8-jsp/jsp/ueditor-mini.jar</systemPath>
+		</dependency>
+
+		<!-- lucene的基本依赖 -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>5.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>5.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>5.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-smartcn</artifactId>
+			<version>5.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>5.2.1</version>
 		</dependency>
 
 

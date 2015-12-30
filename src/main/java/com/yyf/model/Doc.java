@@ -169,5 +169,14 @@ public class Doc {
 	public void setDocForkers(Set<User> docForkers) {
 		this.docForkers = docForkers;
 	}
+
+	@Override
+	public String toString() {
+		return "Doc [docId=" + docId + ", docName=" + docName + ", docSize=" + docSize + ", docDate=" + docDate
+				+ ", docDesc=" + docDesc + ", docPath=" + docPath + ", docFoot=" + docFoot + ", docAuthority="
+				+ docAuthority + ", docContentType=" + docContentType + ", docType=" + docType + ", docOwnUser="
+				+ docOwnUser + "]";
+	}
+	
 	
 }

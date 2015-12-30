@@ -1,6 +1,7 @@
 package com.yyf.model;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,12 +33,12 @@ public class DocType {
 	private String typeName;
 	private String typeDesc;
 
-	@ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.REMOVE })
+	@ManyToOne(cascade = { CascadeType.REFRESH })
 	@JoinColumn(name = "parentTypeId")
 	private DocType parentType;
 
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "parentType")
-	private Set<DocType> childrenDocType = new HashSet<DocType>();
+	private Set<DocType> childrenDocType = new LinkedHashSet<DocType>();
 
 	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "docType")
 	private Set<Doc> docs = new HashSet<Doc>();

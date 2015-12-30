@@ -16,10 +16,10 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-9">
 			<div class="search-form-box">
-				<form action="">
+				<form action="main/search-doc">
 					<div class="logo-box"></div>
 					<div class="input-search-box">
-						<input type="search" class="input-search-input"
+						<input type="search" class="input-search-input" name="searchInfo" value="${param.searchInfo }"
 							placeholder="搜索文档">
 						<button type="submit" class="input-search-btn">
 							<i class="glyphicon glyphicon-search"></i> 搜索

@@ -1,9 +1,12 @@
 package com.yyf.service;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yyf.dao.DocDao;
 import com.yyf.exception.NoUserExcetion;
+import com.yyf.lucene.CreateIndex;
 import com.yyf.model.Doc;
 import com.yyf.model.User;
 import com.yyf.utils.FileUtil;
@@ -23,6 +27,8 @@ public class DocSeviceImpl implements DocSevice {
 
 	@Resource
 	private DocDao dao;
+	
+	private CreateIndex ci = new CreateIndex();
 
 	@Override
 	@Transactional(readOnly = true)
@@ -36,7 +42,7 @@ public class DocSeviceImpl implements DocSevice {
 	}
 
 	@Override
-	public Doc addDoc(Doc doc) {
+	public Doc addDoc(Doc doc){
 		return dao.save(doc);
 	}
 
@@ -65,6 +71,28 @@ public class DocSeviceImpl implements DocSevice {
 		}else{
 			throw new NoUserExcetion();
 		}
+	}
+
+	@Override
+	public Page<Doc> getDocRecentPageByType(Integer pageNum, int defaultPageSize, User user, Long docTypeId) {
+		Pageable pageable = new PageRequest(pageNum, defaultPageSize, new Sort(Direction.DESC, "docDate"));
+		int authority = 2;
+		if(user!=null){
+			authority = 3;
+		}
+		return dao.findByDocAuthorityGreaterThanAndDocType(authority, docTypeId,authority, docTypeId, pageable);
+	}
+
+	@Override
+	public List<Doc> getSearchResult(String searchInfo) throws IOException, ParseException {
+		return ci.getDocSearchList(0, searchInfo);
+	}
+
+	@Override
+	public Doc addDoc(Doc doc, int i) throws IOException {
+		// TODO Auto-generated method stub
+		ci.addIndex(doc);
+		return dao.save(doc);
 	}
 
 }
