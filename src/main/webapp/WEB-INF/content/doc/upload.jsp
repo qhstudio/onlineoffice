@@ -55,6 +55,8 @@
 							action="doc/add-doc-info.action" method="post">
 							<input type="hidden" value="${upDoc.docId }" name="docId"
 								id="docId"><br>
+									<input type="hidden" value="${pageNum}" name="pageNum"
+								id="docId">
 							<div class="form-group">
 								<label for="inputDocName" class="col-sm-2 control-label">名称</label>
 								<div class="col-sm-8">

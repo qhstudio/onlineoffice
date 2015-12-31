@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.apache.struts2.json.annotations.JSON;
@@ -37,6 +38,7 @@ public class DocType {
 	@JoinColumn(name = "parentTypeId")
 	private DocType parentType;
 
+	@OrderBy("typeId desc")
 	@OneToMany(cascade = { CascadeType.REFRESH, CascadeType.REMOVE }, fetch = FetchType.LAZY, mappedBy = "parentType")
 	private Set<DocType> childrenDocType = new LinkedHashSet<DocType>();
 

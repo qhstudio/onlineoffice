@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.yyf.model.Comment;
-import com.yyf.model.Doc;
 /**
  * 评论Dao
  * @author yyf

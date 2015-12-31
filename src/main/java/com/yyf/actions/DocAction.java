@@ -9,10 +9,8 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.data.domain.Page;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.yyf.base.BaseAction;
-import com.yyf.lucene.CreateIndex;
 import com.yyf.model.Doc;
 import com.yyf.model.DocType;
 import com.yyf.model.User;
@@ -36,7 +34,6 @@ public class DocAction extends BaseAction{
 	private String docDesc;
 	private Page<Doc> page;
 	private List<DocType> typeList;
-	private CreateIndex ci = new CreateIndex();
 	
 	public List<DocType> getTypeList() {
 		return typeList;
@@ -177,7 +174,7 @@ public class DocAction extends BaseAction{
 	}
 	
 	
-	@Action(value="add-doc-info",results={@Result(name="success",type="redirectAction",location="mydoc-list")})
+	@Action(value="add-doc-info",results={@Result(name="success",type="chain",location="mydoc-list")})
 	public String addDocInfo() throws Exception{
 		Doc innerDoc = docSevice.getDocById(docId);
 		DocType docType = new DocType();
@@ -187,7 +184,6 @@ public class DocAction extends BaseAction{
 		innerDoc.setDocName(docName);
 		innerDoc.setDocType(docType);
 		try {
-//			System.out.println(innerDoc);
 			docSevice.addDoc(innerDoc,1);
 		} catch (Exception e) {
 			e.printStackTrace();

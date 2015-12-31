@@ -1,6 +1,5 @@
 package com.yyf.lucene;
 
-import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,13 +7,8 @@ import java.util.List;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.CTX_RESTRICT_SCOPE;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 import com.yyf.dao.DocDao;
 import com.yyf.dao.DocTypeDao;

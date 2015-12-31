@@ -70,6 +70,7 @@ public class OfficeConvertImp implements OfficeConvert {
 		}
 		try{
 			Runtime r = Runtime.getRuntime();
+			@SuppressWarnings("unused")
 			Process p = r.exec(pdf2swf+" " + pdfFile.getPath() + " -o "+ swfFile.getPath() + " -T 9");
 		}catch(Exception ex){
 			ex.printStackTrace();

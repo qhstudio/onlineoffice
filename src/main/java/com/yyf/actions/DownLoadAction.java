@@ -38,6 +38,7 @@ public class DownLoadAction extends ActionSupport {
 		//Map<String, Object> session = ActionContext.getContext().getSession();
 		Doc doc = docSevice.getDocById(docId);
 		fileName = doc.getDocName();
+		//System.out.println(fileName);
 		contentType = doc.getDocContentType();
 		File file = new File(FileUtil.RootPath+doc.getDocPath()+ext);
 		inputStream = new FileInputStream(file);

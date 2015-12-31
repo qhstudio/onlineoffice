@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.apache.struts2.json.annotations.JSON;
@@ -38,6 +39,7 @@ public class Comment {
 	@JoinColumn(name = "parentCommentId")
 	private Comment parentComment;
 
+	@OrderBy("commentTime desc")
 	@OneToMany(cascade = { CascadeType.REFRESH}, fetch = FetchType.LAZY, mappedBy = "parentComment")
 	private Set<Comment> childrenComment = new HashSet<Comment>();
 

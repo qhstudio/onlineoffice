@@ -15,9 +15,6 @@ import java.io.Writer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-
-import org.apache.struts2.ServletActionContext;
-
 /**
  * 文件和流的基本操作
  * 

@@ -1,10 +1,8 @@
 package com.yyf.Interceptor;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -48,7 +46,9 @@ public class LoginInterceptor implements Interceptor {
 				return "nouser";
 			}
 		}
+		
 		String ret = invocation.invoke();
+		
 		return ret;
 	}
 

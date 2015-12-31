@@ -46,8 +46,12 @@
 
 					</ul>
 					<p>
+					<s:if test="#session.user != null">
 						<button class="btn btn-default comment-submit"
-							onclick="replyCommentp(this)">发表</button>
+							onclick="replyCommentp(this)">发表</button></s:if><s:else>
+							<button class="btn btn-default comment-submit"
+							onclick="replyCommentp(this)" disabled>发表</button>
+							</s:else>
 					</p>
 
 				</div>

@@ -44,7 +44,7 @@
 									<td><a
 										href="doc/delete?docId=${docId }&pageNum=${page.number}"
 										class="btn btn-danger btn-sm">删除</a> <a
-										href="doc/upload?docId=${docId }"
+										href="doc/upload?docId=${docId }&pageNum=${page.number}"
 										class="btn btn-warning btn-sm">修改</a> <a
 										href="main/doc-result.action?docId=${docId }"
 										class="btn btn-info btn-sm">查看</a></td>
